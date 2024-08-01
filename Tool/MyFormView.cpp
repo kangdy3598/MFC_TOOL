@@ -32,6 +32,8 @@ BEGIN_MESSAGE_MAP(CMyFormView, CFormView)
 	ON_BN_CLICKED(IDC_BUTTON1, &CMyFormView::OnBnClickedUnit)
 	ON_BN_CLICKED(IDC_BUTTON2, &CMyFormView::OnBnClickedTile)
 	ON_BN_CLICKED(IDC_BUTTON3, &CMyFormView::OnBnClickedSave)
+	ON_NOTIFY(TVN_SELCHANGED, IDC_TREE1, &CMyFormView::OnTvnSelchangedTree)
+	ON_NOTIFY(TVN_ITEMCHANGED, IDC_TREE1, &CMyFormView::OnTvnItemChangedTree)
 END_MESSAGE_MAP()
 
 
@@ -64,10 +66,8 @@ void CMyFormView::OnInitialUpdate()
 	m_Font.CreatePointFont(180, L"궁서");
 	//GetDlgItem(IDC_BUTTON1)->SetFont(&m_Font);
 
-	HTREEITEM root;
-	root = m_tree.InsertItem((L"Root"), 0, 0, TVI_ROOT, TVI_LAST);
-	m_tree.InsertItem((L"첫번째 항목"), 0, 0, root, TVI_LAST);
-	m_tree.InsertItem((L"두번째 항목"), 0, 0, root, TVI_LAST);
+	SetTreeListOnProtoss();
+	SetTreeListOnEtc();
 }
 
 
@@ -142,4 +142,48 @@ void CMyFormView::OnBnClickedSave()
 
 		CloseHandle(hFile);
 	}
+}
+
+void CMyFormView::SetTreeListOnProtoss()
+{
+	HTREEITEM root = m_tree.InsertItem((L"프로토스"), 0, 0, TVI_ROOT, TVI_LAST);
+
+	HTREEITEM unit = m_tree.InsertItem((L"유닛"), 0, 0, root, TVI_LAST);
+	HTREEITEM buliding = m_tree.InsertItem((L"건물"), 0, 0, root, TVI_LAST);
+
+	m_tree.InsertItem((L"프로브"), 0, 0, unit, TVI_LAST);
+	m_tree.InsertItem((L"질럿"), 0, 0, unit, TVI_LAST);
+	m_tree.InsertItem((L"드라군"), 0, 0, unit, TVI_LAST);
+
+	m_tree.InsertItem((L"넥서스"), 0, 0, buliding, TVI_LAST);
+	m_tree.InsertItem((L"게이트웨이"), 0, 0, buliding, TVI_LAST);
+	m_tree.InsertItem((L"포톤캐논"), 0, 0, buliding, TVI_LAST);
+}
+
+void CMyFormView::SetTreeListOnEtc()
+{
+	HTREEITEM root = m_tree.InsertItem((L"그 외"), 0, 0, TVI_ROOT, TVI_LAST);
+
+	HTREEITEM mineral = m_tree.InsertItem((L"미네랄"), 0, 0, root, TVI_LAST);
+	HTREEITEM gas = m_tree.InsertItem((L"가스"), 0, 0, root, TVI_LAST);
+	HTREEITEM tile = m_tree.InsertItem((L"타일"), 0, 0, root, TVI_LAST);
+
+	m_tree.InsertItem((L"1번타일"), 0, 0, tile, TVI_LAST);
+	m_tree.InsertItem((L"2번타일"), 0, 0, tile, TVI_LAST);
+	m_tree.InsertItem((L"3번타일"), 0, 0, tile, TVI_LAST);
+}
+
+void CMyFormView::OnTvnSelchangedTree(NMHDR* pNMHDR, LRESULT* pResult)
+{
+	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	*pResult = 0;
+}
+
+
+void CMyFormView::OnTvnItemChangedTree(NMHDR* pNMHDR, LRESULT* pResult)
+{
+	NMTVITEMCHANGE* pNMTVItemChange = reinterpret_cast<NMTVITEMCHANGE*>(pNMHDR);
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	*pResult = 0;
 }

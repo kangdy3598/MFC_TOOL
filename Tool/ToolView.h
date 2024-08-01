@@ -7,6 +7,7 @@
 #include "Device.h"
 #include "TextureMgr.h"
 #include "Terrain.h"
+#include "Unit.h"
 #include "MiniView.h"
 #include "MyFormView.h"
 
@@ -51,6 +52,8 @@ public:
 	void Set_MiniView(CMiniView* _pMiniView) { m_pMiniView = _pMiniView; }
 public:
 	CTerrain* m_pTerrain;
+	CUnit* m_pUnit;
+
 	CMiniView* m_pMiniView;
 
 public:

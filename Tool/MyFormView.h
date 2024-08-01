@@ -35,11 +35,17 @@ public:
 	afx_msg void OnBnClickedUnit();
 	afx_msg void OnBnClickedTile();
 	afx_msg void OnBnClickedSave();
+
+	void SetTreeListOnProtoss();
+	void SetTreeListOnEtc();
+
 public:
 	CUnitTool	m_UnitTool;
 	CTileTool	m_TileTool;
 	
 	CTreeCtrl m_tree;
+	afx_msg void OnTvnSelchangedTree(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnTvnItemChangedTree(NMHDR* pNMHDR, LRESULT* pResult);
 };
 
 

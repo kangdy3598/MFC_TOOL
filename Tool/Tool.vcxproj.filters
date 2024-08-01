@@ -64,6 +64,9 @@
     <Filter Include="04. Etc\02. FilePath">
       <UniqueIdentifier>{7130d530-2c8a-4b27-b17c-e3e0bdc771d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. Etc\03. Unit">
+      <UniqueIdentifier>{b0e1f7b9-006d-4e9d-bb8b-40ecf531122c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -123,6 +126,9 @@
     <ClInclude Include="FilePath.h">
       <Filter>04. Etc\02. FilePath</Filter>
     </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>04. Etc\03. Unit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tool.cpp">
@@ -172,6 +178,9 @@
     </ClCompile>
     <ClCompile Include="FilePath.cpp">
       <Filter>04. Etc\02. FilePath</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>04. Etc\03. Unit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

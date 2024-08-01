@@ -49,15 +49,15 @@ CToolView::~CToolView()
 void CToolView::OnInitialUpdate()
 {
 	CScrollView::OnInitialUpdate();
-
+	
 	//SetScrollSizes 스크롤 바의 사이즈를 지정하는 함수
 	//MM_TEXT: 픽셀 단위로 크기를 조정
 
 	SetScrollSizes(MM_TEXT, CSize(TILECX * TILEX, TILECY * TILEY / 2));
-
+	
 	// AfxGetMainWnd : 현재의 메인 윈도우를 반환하는 전역 함수
 	CMainFrame*		pMainFrm = (CMainFrame*)AfxGetMainWnd();
-
+	
 	RECT	rcWnd{};
 
 	// GetWindowRect : 현재 윈도우의 Rect 정보를 얻어오는 함수
@@ -87,7 +87,7 @@ void CToolView::OnInitialUpdate()
 		int(WINCX + fRowFrm), 
 		int(WINCY + fColFrm), 
 		SWP_NOZORDER);
-
+		
 	pMainFrm->SetToolView(this);
 	g_hWnd = m_hWnd;
 
@@ -110,6 +110,13 @@ void CToolView::OnInitialUpdate()
 	}
 
 	m_pTerrain->Set_ToolView(this);
+
+	m_pUnit = new CUnit;
+	if (FAILED(m_pUnit->Initialize()))
+	{
+		return;
+	}
+	m_pUnit->Set_ToolView(this);
 }
 
 void CToolView::OnDraw(CDC* /*pDC*/)
@@ -119,10 +126,10 @@ void CToolView::OnDraw(CDC* /*pDC*/)
 	if (!pDoc)
 		return;
 
-
 	CDevice::Get_Instance()->Render_Begin();
 
 	m_pTerrain->Render();
+	m_pUnit->Render();
 	//m_pMiniView->OnDraw(nullptr);
 	/*TCHAR	szBuf[MIN_STR] = L"";
 
@@ -164,6 +171,7 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 
 	m_pTerrain->Check_Picking(point + GetScrollPosition(), pTileTool);
 	m_pMiniView->OnDraw(nullptr);
+
 	Invalidate();
 }
 
