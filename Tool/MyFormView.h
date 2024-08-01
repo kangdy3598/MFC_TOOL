@@ -5,6 +5,7 @@
 // CMyFormView 폼 보기
 #include "UnitTool.h"
 #include "TileTool.h"
+#include "BuildingTool.h"
 
 class CMyFormView : public CFormView
 {
@@ -40,12 +41,14 @@ public:
 	void SetTreeListOnEtc();
 
 public:
-	CUnitTool	m_UnitTool;
-	CTileTool	m_TileTool;
-	
+	CUnitTool m_UnitTool;
+	CTileTool m_TileTool;
+	CBuildingTool m_BuildingTool;
+
 	CTreeCtrl m_tree;
 	afx_msg void OnTvnSelchangedTree(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnTvnItemChangedTree(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnBnClickedBuilding();
 };
 
 

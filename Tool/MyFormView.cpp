@@ -34,6 +34,7 @@ BEGIN_MESSAGE_MAP(CMyFormView, CFormView)
 	ON_BN_CLICKED(IDC_BUTTON3, &CMyFormView::OnBnClickedSave)
 	ON_NOTIFY(TVN_SELCHANGED, IDC_TREE1, &CMyFormView::OnTvnSelchangedTree)
 	ON_NOTIFY(TVN_ITEMCHANGED, IDC_TREE1, &CMyFormView::OnTvnItemChangedTree)
+	ON_BN_CLICKED(IDC_BUTTON7, &CMyFormView::OnBnClickedBuilding)
 END_MESSAGE_MAP()
 
 
@@ -91,6 +92,14 @@ void CMyFormView::OnBnClickedTile()
 
 }
 
+void CMyFormView::OnBnClickedBuilding()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	if (nullptr == m_BuildingTool.GetSafeHwnd())
+		m_BuildingTool.Create(IDD_BuildingTool);
+
+	m_BuildingTool.ShowWindow(SW_SHOW);
+}
 
 void CMyFormView::OnBnClickedSave()
 {
@@ -187,3 +196,6 @@ void CMyFormView::OnTvnItemChangedTree(NMHDR* pNMHDR, LRESULT* pResult)
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	*pResult = 0;
 }
+
+
+

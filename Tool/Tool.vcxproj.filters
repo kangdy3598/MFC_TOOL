@@ -67,6 +67,9 @@
     <Filter Include="04. Etc\03. Unit">
       <UniqueIdentifier>{b0e1f7b9-006d-4e9d-bb8b-40ecf531122c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. Etc\01. Dialog\02. Building">
+      <UniqueIdentifier>{37110eec-cee8-4991-af5d-44a20dc03731}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -129,6 +132,9 @@
     <ClInclude Include="Unit.h">
       <Filter>04. Etc\03. Unit</Filter>
     </ClInclude>
+    <ClInclude Include="BuildingTool.h">
+      <Filter>04. Etc\01. Dialog\02. Building</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tool.cpp">
@@ -181,6 +187,9 @@
     </ClCompile>
     <ClCompile Include="Unit.cpp">
       <Filter>04. Etc\03. Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildingTool.cpp">
+      <Filter>04. Etc\01. Dialog\02. Building</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
