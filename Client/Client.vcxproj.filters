@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="00. MainGame">
+      <UniqueIdentifier>{8d1f0d9a-8a98-4a09-ba0a-67e42f8f7acc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager">
+      <UniqueIdentifier>{5ddabb51-7c45-4e1d-aabf-fed630b63509}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\00. Device">
+      <UniqueIdentifier>{23e99705-d49c-45c9-84f9-ce0e3050f0c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\01. TextureManager">
+      <UniqueIdentifier>{9b8cbbab-5381-4f4e-8c07-48788aada2b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\01. TextureManager\00. Texture">
+      <UniqueIdentifier>{05498ef4-8f9c-4cc4-b81e-05967f86d953}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\01. TextureManager\00. Texture\00. Single">
+      <UniqueIdentifier>{6ead951c-ed3e-494d-900d-251fcc0c1c85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\01. TextureManager\00. Texture\01. Multi">
+      <UniqueIdentifier>{ef598759-d6cc-4845-ab80-0136cdc6114e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\02. SceneManager">
+      <UniqueIdentifier>{37e9d5d4-d2ee-492c-91c8-fc0b33ba98fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\03. ObjectManager">
+      <UniqueIdentifier>{639e3d39-df32-4962-b5c8-228fa7324242}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\02. SceneManager\00. Scene">
+      <UniqueIdentifier>{25d0defe-4b21-44cf-9b71-4a5a742c281a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\03. ObjectManager\00. Object">
+      <UniqueIdentifier>{e3d8ba8b-4ae3-4727-b992-f5a5d3415562}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\03. ObjectManager\00. Object\00. MyTerrain">
+      <UniqueIdentifier>{f76e3123-e8e3-439b-8a52-1522b9369892}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <Filter>00. MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Device.h">
+      <Filter>01. Manager\00. Device</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureMgr.h">
+      <Filter>01. Manager\01. TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiTexture.h">
+      <Filter>01. Manager\01. TextureManager\00. Texture\01. Multi</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleTexture.h">
+      <Filter>01. Manager\01. TextureManager\00. Texture\00. Single</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMgr.h">
+      <Filter>01. Manager\02. SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMgr.h">
+      <Filter>01. Manager\03. ObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj.h">
+      <Filter>01. Manager\03. ObjectManager\00. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="MyTerrain.h">
+      <Filter>01. Manager\03. ObjectManager\00. Object\00. MyTerrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>01. Manager\01. TextureManager\00. Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>01. Manager\02. SceneManager\00. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>01. Manager\02. SceneManager\00. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.h">
+      <Filter>00. MainGame</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>00. MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Device.cpp">
+      <Filter>01. Manager\00. Device</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureMgr.cpp">
+      <Filter>01. Manager\01. TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMgr.cpp">
+      <Filter>01. Manager\02. SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiTexture.cpp">
+      <Filter>01. Manager\01. TextureManager\00. Texture\01. Multi</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleTexture.cpp">
+      <Filter>01. Manager\01. TextureManager\00. Texture\00. Single</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjMgr.cpp">
+      <Filter>01. Manager\03. ObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj.cpp">
+      <Filter>01. Manager\03. ObjectManager\00. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="MyTerrain.cpp">
+      <Filter>01. Manager\03. ObjectManager\00. Object\00. MyTerrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>01. Manager\01. TextureManager\00. Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>01. Manager\02. SceneManager\00. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>01. Manager\02. SceneManager\00. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Client.cpp">
+      <Filter>00. MainGame</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Client.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Client.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
