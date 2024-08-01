@@ -24,6 +24,7 @@ CMyFormView::~CMyFormView()
 void CMyFormView::DoDataExchange(CDataExchange* pDX)
 {
 	CFormView::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_TREE1, m_tree);
 }
 
 BEGIN_MESSAGE_MAP(CMyFormView, CFormView)
@@ -62,6 +63,11 @@ void CMyFormView::OnInitialUpdate()
 	CFont		m_Font;
 	m_Font.CreatePointFont(180, L"궁서");
 	//GetDlgItem(IDC_BUTTON1)->SetFont(&m_Font);
+
+	HTREEITEM root;
+	root = m_tree.InsertItem((L"Root"), 0, 0, TVI_ROOT, TVI_LAST);
+	m_tree.InsertItem((L"첫번째 항목"), 0, 0, root, TVI_LAST);
+	m_tree.InsertItem((L"두번째 항목"), 0, 0, root, TVI_LAST);
 }
 
 

@@ -39,6 +39,7 @@ public:
 	CUnitTool	m_UnitTool;
 	CTileTool	m_TileTool;
 	
+	CTreeCtrl m_tree;
 };
 
 
