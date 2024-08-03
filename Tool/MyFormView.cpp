@@ -13,13 +13,9 @@
 IMPLEMENT_DYNCREATE(CMyFormView, CFormView)
 
 CMyFormView::CMyFormView()
-<<<<<<< HEAD
 	: CFormView(IDD_MyFormView)
 	, m_bValue(false)
-=======
-    : CFormView(IDD_MyFormView),
-    iTreeIndex(0)
->>>>>>> origin/main
+    , iTreeIndex(0)
 {
 
 }
@@ -73,23 +69,16 @@ void CMyFormView::OnInitialUpdate()
     CFont		m_Font;
     m_Font.CreatePointFont(180, L"궁서");
 
-<<<<<<< HEAD
-	CMainFrame* pMainFrm = (CMainFrame*)AfxGetMainWnd();
-	CToolView* pToolView = pMainFrm->GetToolView();
-	pToolView->Set_MyView(this);
-
-	SetTreeListOnProtoss();
-	SetTreeListOnEtc();
-	
-=======
     iTreeIndex = 1;
-
+    CMainFrame* pMainFrm = (CMainFrame*)AfxGetMainWnd();
+    CToolView* pToolView = pMainFrm->GetToolView();
+    pToolView->Set_MyView(this);
+    
     root = m_tree.InsertItem((L"프로토스"), 0, 0, TVI_ROOT, TVI_LAST);
     unit = m_tree.InsertItem((L"유닛"), 0, 0, root, TVI_LAST);
     building = m_tree.InsertItem((L"건물"), 0, 0, root, TVI_LAST);
 
     SetTreeListOnEtc();
->>>>>>> origin/main
 }
 
 void CMyFormView::OnBnClickedUnit()
@@ -185,30 +174,7 @@ void CMyFormView::OnBnClickedSave()
 
 void CMyFormView::SetTreeListOnProtoss()
 {
-    //m_tree.InsertItem((L"프로브"), 0, 0, unit, TVI_LAST);
-    //m_tree.InsertItem((L"질럿"), 0, 0, unit, TVI_LAST);
-    //m_tree.InsertItem((L"드라군"), 0, 0, unit, TVI_LAST);
-
-<<<<<<< HEAD
-	HTREEITEM unit = m_tree.InsertItem((L"유닛"), 0, 0, root, TVI_LAST);
-	HTREEITEM buliding = m_tree.InsertItem((L"건물"), 0, 0, root, TVI_LAST);
-
-	m_tree.InsertItem((L"프로브"), 0, 0, unit, TVI_LAST);
-	m_tree.InsertItem((L"질럿"), 0, 0, unit, TVI_LAST);
-	m_tree.InsertItem((L"드라군"), 0, 0, unit, TVI_LAST);
-
-	m_tree.InsertItem((L"넥서스"), 0, 0, buliding, TVI_LAST);
-	m_tree.InsertItem((L"게이트웨이"), 0, 0, buliding, TVI_LAST);
-	m_tree.InsertItem((L"포톤캐논"), 0, 0, buliding, TVI_LAST);
-
-	m_tree.Expand(unit, TVE_EXPAND);
-	m_tree.Expand(buliding, TVE_EXPAND);
-
-=======
-    //m_tree.InsertItem((L"넥서스"), 0, 0, buliding, TVI_LAST);
-    //m_tree.InsertItem((L"게이트웨이"), 0, 0, buliding, TVI_LAST);
-    //m_tree.InsertItem((L"포톤캐논"), 0, 0, buliding, TVI_LAST);
->>>>>>> origin/main
+    
 }
 
 void CMyFormView::SetTreeListOnEtc()
@@ -273,16 +239,11 @@ void CMyFormView::Render()
 
 void CMyFormView::OnTvnSelchangedTree(NMHDR* pNMHDR, LRESULT* pResult)
 {
-<<<<<<< HEAD
 	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	*pResult = 0;
-=======
-    LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
-    // TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-    *pResult = 0;
-}
->>>>>>> origin/main
+
+
 
 	HTREEITEM hSelected = m_tree.GetSelectedItem();
 	CString SelectedName = m_tree.GetItemText(hSelected);
