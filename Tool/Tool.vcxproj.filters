@@ -1,126 +1,82 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="00. Main">
-      <UniqueIdentifier>{2f58999a-42e8-4830-95cc-910454c48b59}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. MainFrm">
-      <UniqueIdentifier>{4040a9aa-8e65-4da7-9b40-5bb27ecf7256}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. ToolView">
-      <UniqueIdentifier>{11a780a2-4236-4690-bf43-c561c32df82b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. ToolView\00. MiniView">
-      <UniqueIdentifier>{b21b001a-6425-43f2-a9a0-ea8a993ce6ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. ToolView\01. MyView">
-      <UniqueIdentifier>{571f70d7-e0fa-4579-9e82-a6e05fd92d00}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. ToolDoc">
-      <UniqueIdentifier>{db978e67-dc62-4d63-b52a-242436598544}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. Manager">
-      <UniqueIdentifier>{e332340e-f2d0-4244-b352-e6858823fdad}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. Manager\00. Device">
-      <UniqueIdentifier>{d6a89915-11f7-4bcd-bc3f-4c0e284ad123}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. Manager\01. TextureMgr">
-      <UniqueIdentifier>{7d012cb3-6ca7-45ae-8a4f-484b9b8143de}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. Manager\01. TextureMgr\Texture">
-      <UniqueIdentifier>{6b32d0e4-0cd3-46c2-8379-005c2128b60b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. Manager\01. TextureMgr\Texture\01. Multi">
-      <UniqueIdentifier>{7a5d3ad3-e31c-4484-be91-4054db9d7e10}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. Manager\01. TextureMgr\Texture\00. Single">
-      <UniqueIdentifier>{7c14f174-f2e1-47ca-87e4-ff69316474c3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="05. Etc">
-      <UniqueIdentifier>{2f3fbebe-4421-4119-a60f-c540e8b45875}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="05. Etc\00. Terrain">
-      <UniqueIdentifier>{f9f1533b-f73c-4d28-93d4-62d9be2447b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="05. Etc\01. Dialog">
-      <UniqueIdentifier>{3783a858-32f0-4cbb-891f-11fb4ed40456}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="05. Etc\01. Dialog\00. UnitTool">
-      <UniqueIdentifier>{6fbb747a-f643-4870-b0e6-ceefd0321c75}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="05. Etc\01. Dialog\01. TileTool">
-      <UniqueIdentifier>{de749c5a-499a-470a-befd-ae65bfa75a73}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="05. Etc\02. FilePath">
-      <UniqueIdentifier>{7130d530-2c8a-4b27-b17c-e3e0bdc771d4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="05. Etc\03. Unit">
-      <UniqueIdentifier>{b0e1f7b9-006d-4e9d-bb8b-40ecf531122c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="05. Etc\01. Dialog\02. BuildingTool">
-      <UniqueIdentifier>{37110eec-cee8-4991-af5d-44a20dc03731}</UniqueIdentifier>
-    </Filter>
-<<<<<<< HEAD
-    <Filter Include="05. Etc\04. Building">
-      <UniqueIdentifier>{7640ae55-2bb6-4aff-a402-e101e0c9b1f3}</UniqueIdentifier>
-=======
-    <Filter Include="04. Etc\01. Dialog\00. UnitTool\00.UnitImageBox">
-      <UniqueIdentifier>{82d5887b-080c-4fcd-bb53-6799d03019bc}</UniqueIdentifier>
->>>>>>> origin/main
-    </Filter>
+    <ClCompile Include="Tool.cpp">
+      <Filter>00. Main</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>01. MainFrm</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniView.cpp">
+      <Filter>02. ToolView\00. MiniView</Filter>
+    </ClCompile>
+    <ClCompile Include="Building.cpp">
+      <Filter>05. Etc\04. Building</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>05. Etc\03. Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolDoc.cpp">
+      <Filter>03. ToolDoc</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>05. Etc\00. Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiTexture.cpp">
+      <Filter>04. Manager\01. TextureManager\00. Texture\01. MultiTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleTexture.cpp">
+      <Filter>04. Manager\01. TextureManager\00. Texture\00. SingleTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="Device.cpp">
+      <Filter>04. Manager\00. Device</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolView.cpp">
+      <Filter>02. ToolView</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitImageBox.cpp">
+      <Filter>05. Etc</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitTool.cpp">
+      <Filter>05. Etc\01. Dialog\00. UnitTool</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildingTool.cpp">
+      <Filter>05. Etc\01. Dialog\02. BuildingTool</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureMgr.cpp">
+      <Filter>04. Manager\01. TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>04. Manager\01. TextureManager\00. Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="FilePath.cpp">
+      <Filter>05. Etc\02. FilePath</Filter>
+    </ClCompile>
+    <ClCompile Include="TileTool.cpp">
+      <Filter>05. Etc\01. Dialog\01. TileTool</Filter>
+    </ClCompile>
+    <ClCompile Include="MyFormView.cpp">
+      <Filter>02. ToolView\01. MyView</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="Tool.h">
+      <Filter>00. Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="MainFrm.h">
       <Filter>01. MainFrm</Filter>
-    </ClInclude>
-    <ClInclude Include="ToolView.h">
-      <Filter>02. ToolView</Filter>
-    </ClInclude>
-    <ClInclude Include="ToolDoc.h">
-      <Filter>03. ToolDoc</Filter>
-    </ClInclude>
-    <ClInclude Include="Device.h">
-      <Filter>04. Manager\00. Device</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>04. Manager\01. TextureMgr\Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="SingleTexture.h">
-      <Filter>04. Manager\01. TextureMgr\Texture\00. Single</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureMgr.h">
-      <Filter>04. Manager\01. TextureMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="MultiTexture.h">
-      <Filter>04. Manager\01. TextureMgr\Texture\01. Multi</Filter>
-    </ClInclude>
-    <ClInclude Include="Terrain.h">
-      <Filter>05. Etc\00. Terrain</Filter>
     </ClInclude>
     <ClInclude Include="MiniView.h">
       <Filter>02. ToolView\00. MiniView</Filter>
@@ -128,92 +84,136 @@
     <ClInclude Include="MyFormView.h">
       <Filter>02. ToolView\01. MyView</Filter>
     </ClInclude>
-    <ClInclude Include="UnitTool.h">
-      <Filter>05. Etc\01. Dialog\00. UnitTool</Filter>
-    </ClInclude>
-    <ClInclude Include="TileTool.h">
-      <Filter>05. Etc\01. Dialog\01. TileTool</Filter>
-    </ClInclude>
-    <ClInclude Include="FilePath.h">
-      <Filter>05. Etc\02. FilePath</Filter>
+    <ClInclude Include="Building.h">
+      <Filter>05. Etc\04. Building</Filter>
     </ClInclude>
     <ClInclude Include="Unit.h">
       <Filter>05. Etc\03. Unit</Filter>
     </ClInclude>
+    <ClInclude Include="ToolView.h">
+      <Filter>02. ToolView</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolDoc.h">
+      <Filter>03. ToolDoc</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>05. Etc\00. Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiTexture.h">
+      <Filter>04. Manager\01. TextureManager\00. Texture\01. MultiTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleTexture.h">
+      <Filter>04. Manager\01. TextureManager\00. Texture\00. SingleTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="Device.h">
+      <Filter>04. Manager\00. Device</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitImageBox.h">
+      <Filter>05. Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitTool.h">
+      <Filter>05. Etc\01. Dialog\00. UnitTool</Filter>
+    </ClInclude>
     <ClInclude Include="BuildingTool.h">
       <Filter>05. Etc\01. Dialog\02. BuildingTool</Filter>
     </ClInclude>
-    <ClInclude Include="Tool.h">
-      <Filter>00. Main</Filter>
+    <ClInclude Include="TextureMgr.h">
+      <Filter>04. Manager\01. TextureManager</Filter>
     </ClInclude>
-    <ClInclude Include="Building.h">
-      <Filter>05. Etc\04. Building</Filter>
+    <ClInclude Include="FilePath.h">
+      <Filter>05. Etc\02. FilePath</Filter>
     </ClInclude>
-    <ClInclude Include="UnitImageBox.h">
-      <Filter>04. Etc\01. Dialog\00. UnitTool\00.UnitImageBox</Filter>
+    <ClInclude Include="TileTool.h">
+      <Filter>05. Etc\01. Dialog\01. TileTool</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>04. Manager\01. TextureManager\00. Texture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="MainFrm.cpp">
-      <Filter>01. MainFrm</Filter>
-    </ClCompile>
-    <ClCompile Include="ToolView.cpp">
-      <Filter>02. ToolView</Filter>
-    </ClCompile>
-    <ClCompile Include="ToolDoc.cpp">
-      <Filter>03. ToolDoc</Filter>
-    </ClCompile>
-    <ClCompile Include="Device.cpp">
-      <Filter>04. Manager\00. Device</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>04. Manager\01. TextureMgr\Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="SingleTexture.cpp">
-      <Filter>04. Manager\01. TextureMgr\Texture\00. Single</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureMgr.cpp">
-      <Filter>04. Manager\01. TextureMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="MultiTexture.cpp">
-      <Filter>04. Manager\01. TextureMgr\Texture\01. Multi</Filter>
-    </ClCompile>
-    <ClCompile Include="Terrain.cpp">
-      <Filter>05. Etc\00. Terrain</Filter>
-    </ClCompile>
-    <ClCompile Include="MiniView.cpp">
-      <Filter>02. ToolView\00. MiniView</Filter>
-    </ClCompile>
-    <ClCompile Include="MyFormView.cpp">
-      <Filter>02. ToolView\01. MyView</Filter>
-    </ClCompile>
-    <ClCompile Include="UnitTool.cpp">
-      <Filter>05. Etc\01. Dialog\00. UnitTool</Filter>
-    </ClCompile>
-    <ClCompile Include="TileTool.cpp">
-      <Filter>05. Etc\01. Dialog\01. TileTool</Filter>
-    </ClCompile>
-    <ClCompile Include="FilePath.cpp">
-      <Filter>05. Etc\02. FilePath</Filter>
-    </ClCompile>
-    <ClCompile Include="Unit.cpp">
-      <Filter>05. Etc\03. Unit</Filter>
-    </ClCompile>
-    <ClCompile Include="BuildingTool.cpp">
-      <Filter>05. Etc\01. Dialog\02. BuildingTool</Filter>
-    </ClCompile>
-    <ClCompile Include="Tool.cpp">
-      <Filter>00. Main</Filter>
-    </ClCompile>
-    <ClCompile Include="Building.cpp">
-      <Filter>05. Etc\04. Building</Filter>
-    </ClCompile>
-    <ClCompile Include="UnitImageBox.cpp">
-      <Filter>04. Etc\01. Dialog\00. UnitTool\00.UnitImageBox</Filter>
-    </ClCompile>
+    <Image Include="res\Toolbar.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\Tool.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\ToolDoc.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{b084ec19-e915-4b80-83ce-fe82718664e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{5565cd14-cc26-4754-b622-b7a5f8f412e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{d5279794-ae41-4772-aa72-bc678ec85362}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Main">
+      <UniqueIdentifier>{72610432-2a18-448b-a3eb-23e14d245c79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. MainFrm">
+      <UniqueIdentifier>{124e8faa-18e3-4e32-a591-9127ed5c676c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. ToolView">
+      <UniqueIdentifier>{75950c88-6058-4aed-8c8d-d2e7329727c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. ToolView\00. MiniView">
+      <UniqueIdentifier>{1da738ed-ad95-4a1b-9422-d0087d4c3f6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. ToolView\01. MyView">
+      <UniqueIdentifier>{0f51c20a-fa46-498b-b51e-aaf958d4dca0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. ToolDoc">
+      <UniqueIdentifier>{3d03cae5-c040-4373-a84a-550abd19d27e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager">
+      <UniqueIdentifier>{b667b12d-88c5-440e-b18d-06983f7c4078}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Etc">
+      <UniqueIdentifier>{b9be84be-ce52-41ec-a93c-590133fed482}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Etc\03. Unit">
+      <UniqueIdentifier>{1dcddfcb-62a5-4b48-8d87-57083783e0dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Etc\04. Building">
+      <UniqueIdentifier>{2ee2fecf-fe09-4fa7-bd30-b07a5aa95213}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Etc\00. Terrain">
+      <UniqueIdentifier>{d7c77f01-9197-41fe-aa76-20153de86baf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Etc\01. Dialog">
+      <UniqueIdentifier>{71169075-c1ec-4335-b439-b2ae9b7b0cda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Etc\02. FilePath">
+      <UniqueIdentifier>{35469d75-adbb-49db-92a2-7b1cf3f9c1a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\00. Device">
+      <UniqueIdentifier>{e0c30fb0-f075-4608-b392-95d94c676bb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\01. TextureManager">
+      <UniqueIdentifier>{1ed29ab7-2c8a-4510-a0cd-baf6ff47dd99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\01. TextureManager\00. Texture">
+      <UniqueIdentifier>{2dce23ea-b05b-4e28-b7f1-e9bc842e334a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\01. TextureManager\00. Texture\00. SingleTexture">
+      <UniqueIdentifier>{c5c25a7c-c220-48c5-a2ed-fbd5d039a55f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Manager\01. TextureManager\00. Texture\01. MultiTexture">
+      <UniqueIdentifier>{6af7d76d-322a-449e-9e8a-1b536521fb84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Etc\01. Dialog\00. UnitTool">
+      <UniqueIdentifier>{352176ee-7b60-4a10-bf49-2113cf236e34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Etc\01. Dialog\01. TileTool">
+      <UniqueIdentifier>{5c9a2fcb-2314-4d51-a316-f396ef02013b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Etc\01. Dialog\02. BuildingTool">
+      <UniqueIdentifier>{a34dc013-0d4a-42da-9090-f2741825e341}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Tool.rc">
@@ -226,14 +226,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\ToolDoc.ico">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\Tool.ico">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\Toolbar.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
+    <Text Include="ReadMe.txt" />
   </ItemGroup>
 </Project>
