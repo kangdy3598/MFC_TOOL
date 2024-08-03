@@ -12,6 +12,7 @@
 #define IDD_UnitTool                    311
 #define IDD_TileTool                    312
 #define IDD_BuildingTool                313
+#define IDD_UNITIMAGEBOX                315
 #define IDC_BUTTON1                     1000
 #define IDC_LIST1                       1002
 #define IDC_EDIT1                       1003
@@ -38,9 +39,14 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        318
+#define _APS_NEXT_RESOURCE_VALUE        319
 #define _APS_NEXT_COMMAND_VALUE         32771
+<<<<<<< HEAD
 #define _APS_NEXT_CONTROL_VALUE         1022
 #define _APS_NEXT_SYMED_VALUE           315
+=======
+#define _APS_NEXT_CONTROL_VALUE         1018
+#define _APS_NEXT_SYMED_VALUE           316
+>>>>>>> origin/main
 #endif
 #endif

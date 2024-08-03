@@ -49,9 +49,13 @@ typedef	struct tagUnitData
 {
 #ifndef _AFX
 	wstring	strName;
+	wstring	strPathName;
 #else
 	CString	strName;
+	CString	strPathName;
 #endif
+
+
 	int		iHP;
 	int		iAttack;
 

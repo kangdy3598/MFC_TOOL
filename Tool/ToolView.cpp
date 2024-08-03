@@ -178,6 +178,10 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 
 	CTileTool* pTileTool = &pMyForm->m_TileTool;
 
+
+
+
+
 	m_pTerrain->Check_Picking(point + GetScrollPosition(), pTileTool);
 	m_pMiniView->OnDraw(nullptr);
 	

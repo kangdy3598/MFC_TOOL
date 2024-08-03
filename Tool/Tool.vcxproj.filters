@@ -73,8 +73,13 @@
     <Filter Include="05. Etc\01. Dialog\02. BuildingTool">
       <UniqueIdentifier>{37110eec-cee8-4991-af5d-44a20dc03731}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
     <Filter Include="05. Etc\04. Building">
       <UniqueIdentifier>{7640ae55-2bb6-4aff-a402-e101e0c9b1f3}</UniqueIdentifier>
+=======
+    <Filter Include="04. Etc\01. Dialog\00. UnitTool\00.UnitImageBox">
+      <UniqueIdentifier>{82d5887b-080c-4fcd-bb53-6799d03019bc}</UniqueIdentifier>
+>>>>>>> origin/main
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +149,9 @@
     <ClInclude Include="Building.h">
       <Filter>05. Etc\04. Building</Filter>
     </ClInclude>
+    <ClInclude Include="UnitImageBox.h">
+      <Filter>04. Etc\01. Dialog\00. UnitTool\00.UnitImageBox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -202,6 +210,9 @@
     </ClCompile>
     <ClCompile Include="Building.cpp">
       <Filter>05. Etc\04. Building</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitImageBox.cpp">
+      <Filter>04. Etc\01. Dialog\00. UnitTool\00.UnitImageBox</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
