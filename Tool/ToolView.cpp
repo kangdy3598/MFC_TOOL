@@ -117,6 +117,13 @@ void CToolView::OnInitialUpdate()
 		return;
 	}
 	m_pUnit->Set_ToolView(this);
+
+	m_pBuilding = new CBuilding;
+	if (FAILED(m_pBuilding->Initialize()))
+	{
+		return;
+	}
+	m_pBuilding->Set_ToolView(this);
 }
 
 void CToolView::OnDraw(CDC* /*pDC*/)
@@ -130,6 +137,8 @@ void CToolView::OnDraw(CDC* /*pDC*/)
 
 	m_pTerrain->Render();
 	m_pUnit->Render();
+	m_pBuilding->Render();
+
 	//m_pMiniView->OnDraw(nullptr);
 	/*TCHAR	szBuf[MIN_STR] = L"";
 
@@ -171,10 +180,16 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 
 	m_pTerrain->Check_Picking(point + GetScrollPosition(), pTileTool);
 	m_pMiniView->OnDraw(nullptr);
+	
 
 	Invalidate();
 }
 
+void CToolView::OnMouseMove(UINT nFlags, CPoint point)
+{
+	CScrollView::OnMouseMove(nFlags, point);
+	AfxMessageBox(L"mouse move");
+}
 
 
 #pragma region »ý·«

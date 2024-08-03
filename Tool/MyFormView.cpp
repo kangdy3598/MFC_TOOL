@@ -13,6 +13,7 @@ IMPLEMENT_DYNCREATE(CMyFormView, CFormView)
 
 CMyFormView::CMyFormView()
 	: CFormView(IDD_MyFormView)
+	, m_bValue(false)
 {
 
 }
@@ -67,10 +68,14 @@ void CMyFormView::OnInitialUpdate()
 	m_Font.CreatePointFont(180, L"궁서");
 	//GetDlgItem(IDC_BUTTON1)->SetFont(&m_Font);
 
+	CMainFrame* pMainFrm = (CMainFrame*)AfxGetMainWnd();
+	CToolView* pToolView = pMainFrm->GetToolView();
+	pToolView->Set_MyView(this);
+
 	SetTreeListOnProtoss();
 	SetTreeListOnEtc();
+	
 }
-
 
 void CMyFormView::OnBnClickedUnit()
 {
@@ -80,7 +85,6 @@ void CMyFormView::OnBnClickedUnit()
 
 	m_UnitTool.ShowWindow(SW_SHOW);
 }
-
 
 void CMyFormView::OnBnClickedTile()
 {
@@ -167,6 +171,10 @@ void CMyFormView::SetTreeListOnProtoss()
 	m_tree.InsertItem((L"넥서스"), 0, 0, buliding, TVI_LAST);
 	m_tree.InsertItem((L"게이트웨이"), 0, 0, buliding, TVI_LAST);
 	m_tree.InsertItem((L"포톤캐논"), 0, 0, buliding, TVI_LAST);
+
+	m_tree.Expand(unit, TVE_EXPAND);
+	m_tree.Expand(buliding, TVE_EXPAND);
+
 }
 
 void CMyFormView::SetTreeListOnEtc()
@@ -182,13 +190,70 @@ void CMyFormView::SetTreeListOnEtc()
 	m_tree.InsertItem((L"3번타일"), 0, 0, tile, TVI_LAST);
 }
 
+void CMyFormView::Render()
+{
+	if (!m_bValue)
+		return;
+	D3DXMATRIX		matWorld, matScale, matTrans;
+
+	TCHAR	szBuf[MIN_STR] = L"";
+
+	//for (auto pTile : m_vecTile)
+	{
+		D3DXMatrixIdentity(&matWorld);
+		D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
+		D3DXMatrixTranslation(&matTrans,
+			300,
+			300, 0.f);
+
+		matWorld = matScale * matTrans;
+
+		RECT	rc{};
+
+		// GetClientRect : 클라이언트 영역에 해당하는 RECT 정보를 얻어오는 함수
+		//GetClientRect(m_ToolView->m_hWnd, &rc);
+
+		float	fRatioX = WINCX / float(rc.right - rc.left);
+		float	fRatioY = WINCY / float(rc.bottom - rc.top);
+
+		//Set_Ratio(&matWorld, fRatioX, fRatioY);
+
+		CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
+
+		const TEXINFO* pTexInfo =
+			CTextureMgr::Get_Instance()->Get_Texture(L"Building", L"Building");
+
+		float	fCenterX = pTexInfo->tImgInfo.Width / 2.f;
+		float	fCenterY = pTexInfo->tImgInfo.Height / 2.f;
+
+		HRESULT result = CDevice::Get_Instance()->Get_Sprite()->Draw(
+			pTexInfo->pTexture,
+			nullptr,
+			&D3DXVECTOR3(fCenterX, fCenterY, 0.f), 
+			nullptr,
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	}
+
+
+}
+
 void CMyFormView::OnTvnSelchangedTree(NMHDR* pNMHDR, LRESULT* pResult)
 {
 	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	*pResult = 0;
-}
 
+	HTREEITEM hSelected = m_tree.GetSelectedItem();
+	CString SelectedName = m_tree.GetItemText(hSelected);
+	if (!lstrcmp(SelectedName, L"게이트웨이"))
+	{
+		m_bValue = true;
+		CMainFrame* pMainFrm = (CMainFrame*)AfxGetMainWnd();
+		CToolView* pToolView = pMainFrm->GetToolView();
+		pToolView->OnDraw(nullptr);
+	}
+}
 
 void CMyFormView::OnTvnItemChangedTree(NMHDR* pNMHDR, LRESULT* pResult)
 {
@@ -196,6 +261,4 @@ void CMyFormView::OnTvnItemChangedTree(NMHDR* pNMHDR, LRESULT* pResult)
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	*pResult = 0;
 }
-
-
 

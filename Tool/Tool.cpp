@@ -176,6 +176,12 @@ void CToolApp::OnAppAbout()
 	aboutDlg.DoModal();
 }
 
+void CToolApp::test()
+{
+	CAboutDlg aboutDlg;
+	aboutDlg.DoModal();
+}
+
 // CToolApp 메시지 처리기
 
 

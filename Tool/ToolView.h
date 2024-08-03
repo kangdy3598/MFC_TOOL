@@ -6,8 +6,11 @@
 
 #include "Device.h"
 #include "TextureMgr.h"
+
 #include "Terrain.h"
 #include "Unit.h"
+#include "Building.h"
+
 #include "MiniView.h"
 #include "MyFormView.h"
 
@@ -50,16 +53,21 @@ protected:
 
 public:
 	void Set_MiniView(CMiniView* _pMiniView) { m_pMiniView = _pMiniView; }
+	void Set_MyView(CMyFormView* _pMyView) { m_pMyFormView = _pMyView; }
 public:
 	CTerrain* m_pTerrain;
 	CUnit* m_pUnit;
+	CBuilding* m_pBuilding;
 
 	CMiniView* m_pMiniView;
+	CMyFormView* m_pMyFormView;
 
 public:
 	virtual void OnInitialUpdate();
 	afx_msg void OnDestroy();
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+
 };
 
 #ifndef _DEBUG  // ToolView.cpp의 디버그 버전

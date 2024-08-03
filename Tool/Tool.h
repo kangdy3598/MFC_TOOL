@@ -27,6 +27,7 @@ public:
 
 // 구현입니다.
 	afx_msg void OnAppAbout();
+	void test();
 	DECLARE_MESSAGE_MAP()
 };
 

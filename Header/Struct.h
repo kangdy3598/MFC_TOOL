@@ -60,6 +60,26 @@ typedef	struct tagUnitData
 
 }UNITDATA;
 
+typedef	struct tagBuildingData
+{
+#ifndef _AFX
+	wstring	strName;
+	wstring strImgPath;
+#else
+	CString	strName;
+	CString strImgPath;
+#endif
+	int		iHP;
+	int		iShield;
+	int		iAttack;
+
+	BYTE	byBuildRace;		// byJobIndex;
+	BYTE	byAttackType;	// byItem;
+
+
+
+}BUILDINGDATA;
+
 typedef struct tagTexturePath
 {
 	wstring		wstrObjKey		= L"";

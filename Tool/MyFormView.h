@@ -36,9 +36,14 @@ public:
 	afx_msg void OnBnClickedUnit();
 	afx_msg void OnBnClickedTile();
 	afx_msg void OnBnClickedSave();
+	afx_msg void OnBnClickedBuilding();
+
+	afx_msg void OnTvnSelchangedTree(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnTvnItemChangedTree(NMHDR* pNMHDR, LRESULT* pResult);
 
 	void SetTreeListOnProtoss();
 	void SetTreeListOnEtc();
+	void Render();
 
 public:
 	CUnitTool m_UnitTool;
@@ -46,9 +51,7 @@ public:
 	CBuildingTool m_BuildingTool;
 
 	CTreeCtrl m_tree;
-	afx_msg void OnTvnSelchangedTree(NMHDR* pNMHDR, LRESULT* pResult);
-	afx_msg void OnTvnItemChangedTree(NMHDR* pNMHDR, LRESULT* pResult);
-	afx_msg void OnBnClickedBuilding();
+	bool m_bValue;
 };
 
 

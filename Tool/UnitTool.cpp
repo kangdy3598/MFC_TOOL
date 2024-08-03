@@ -325,3 +325,4 @@ void CUnitTool::OnListBoxSelChange()
 
 	UpdateData(FALSE);
 }
+

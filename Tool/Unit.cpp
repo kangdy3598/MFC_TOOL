@@ -31,7 +31,7 @@ HRESULT CUnit::Initialize()
 		L"../Texture/MultiTexture/Unit/Protoss/Dragoon/Stand/0.png",
 		TEX_MULTI, L"Unit", L"Unit", MAX_TILETYPE)))
 	{
-		AfxMessageBox(L"Tile Texture Failed");
+		AfxMessageBox(L"Unit Texture Failed");
 		return E_FAIL;
 	}
 	
