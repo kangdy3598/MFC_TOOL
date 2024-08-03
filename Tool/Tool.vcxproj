@@ -213,6 +213,7 @@
     <ClInclude Include="ToolDoc.h" />
     <ClInclude Include="ToolView.h" />
     <ClInclude Include="Unit.h" />
+    <ClInclude Include="UnitImageBox.h" />
     <ClInclude Include="UnitTool.h" />
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +239,7 @@
     <ClCompile Include="ToolDoc.cpp" />
     <ClCompile Include="ToolView.cpp" />
     <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="UnitImageBox.cpp" />
     <ClCompile Include="UnitTool.cpp" />
   </ItemGroup>
   <ItemGroup>
