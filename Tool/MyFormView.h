@@ -47,6 +47,8 @@ public:
 	void SetTreeListOnEtc();
 	void Render();
 
+	void Show_TreeUnitList();
+
 
 	CTreeCtrl& Get_TreeCtrl() { return m_tree; }
 public:

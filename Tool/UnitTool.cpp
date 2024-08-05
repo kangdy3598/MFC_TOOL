@@ -11,7 +11,7 @@
 #include "FilePath.h"
 
 #include "MyFormView.h"
-
+    
 #include "PathFind.h"
 
 
@@ -430,5 +430,10 @@ void CUnitTool::OnBnClickedOk()
 
     m_bSelected = true;
 
+
+    CMainFrame* pMainFrm = (CMainFrame*)AfxGetMainWnd();
+    CToolView* pToolView = pMainFrm->GetToolView();
+
+    pToolView->Get_MyView()->Show_TreeUnitList();
 }
 

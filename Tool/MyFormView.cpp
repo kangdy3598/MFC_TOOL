@@ -92,7 +92,7 @@ void CMyFormView::OnBnClickedUnit()
 
     m_UnitTool.ShowWindow(SW_SHOW);
 
-    if (m_UnitTool.Get_Selected())
+ /*   if (m_UnitTool.Get_Selected())
     {
         CString strTreeName;
 
@@ -103,7 +103,7 @@ void CMyFormView::OnBnClickedUnit()
         m_tree.InsertItem(strTreeName, 0, 0, unit, TVI_LAST);
 
         m_UnitTool.Set_Selected(false);
-    }
+    }*/
 }
 
 void CMyFormView::OnBnClickedTile()
@@ -187,7 +187,15 @@ void CMyFormView::OnBnClickedSave()
 
 void CMyFormView::SetTreeListOnProtoss()
 {
+    CString strTreeName;
 
+    strName = m_UnitTool.Get_Name();
+
+    strTreeName.Format(_T("%s"), strName);
+
+    m_tree.InsertItem(strTreeName, 0, 0, unit, TVI_LAST);
+
+    m_UnitTool.Set_Selected(false);
 }
 
 void CMyFormView::SetTreeListOnEtc()
@@ -248,6 +256,19 @@ void CMyFormView::Render()
     }
 }
 
+void CMyFormView::Show_TreeUnitList()
+{
+    CString strTreeName;
+
+    strName = m_UnitTool.Get_Name();
+
+    strTreeName.Format(_T("%s"), strName);
+
+    m_tree.InsertItem(strTreeName, 0, 0, unit, TVI_LAST);
+
+    m_UnitTool.Set_Selected(false);
+}
+
 void CMyFormView::OnTvnSelchangedTree(NMHDR* pNMHDR, LRESULT* pResult)
 {
     LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
@@ -256,6 +277,7 @@ void CMyFormView::OnTvnSelchangedTree(NMHDR* pNMHDR, LRESULT* pResult)
 
     HTREEITEM hSelected = m_tree.GetSelectedItem();
     CString SelectedName = m_tree.GetItemText(hSelected);
+
     if (!lstrcmp(SelectedName, m_UnitTool.Get_Name()))
     {
         m_bValue = true;

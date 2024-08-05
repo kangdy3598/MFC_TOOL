@@ -54,6 +54,8 @@ protected:
 public:
 	void Set_MiniView(CMiniView* _pMiniView) { m_pMiniView = _pMiniView; }
 	void Set_MyView(CMyFormView* _pMyView) { m_pMyFormView = _pMyView; }
+
+	CMyFormView* Get_MyView() { return m_pMyFormView; }
 public:
 	CTerrain* m_pTerrain;
 	//CUnit* m_pUnit;
