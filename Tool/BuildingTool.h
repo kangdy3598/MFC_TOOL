@@ -34,7 +34,7 @@ public:
 	BUILDINGDATA* m_tSelectBuildingData;
 
 	CString m_strFullPath;
-	CString m_strNameKey;
+	CString m_strKeyName;
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
 

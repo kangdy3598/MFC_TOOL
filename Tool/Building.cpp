@@ -182,7 +182,7 @@ void CBuilding::PreviewRender()
 		HRESULT result = CDevice::Get_Instance()->Get_Sprite()->Draw(
 			pTexInfo->pTexture,
 			nullptr, &D3DXVECTOR3(fCenterX, fCenterY, 0.f), nullptr,
-			D3DCOLOR_ARGB(255, 255, 255, 255));
+			D3DCOLOR_ARGB(128, 255, 255, 255));
 
 	}
 }
@@ -190,6 +190,7 @@ void CBuilding::PreviewRender()
 // CToolView::OnLButtonDown()에 의해 호출
 // 현재 마우스 위치에 m_vecBuilding에 건물 정보를 넣고 Invalidate() 호출
 // Invalidate() 호출 -> OnDraw() 호출 -> CBuilding::Render() 호출
+
 void CBuilding::InstallBuilding()
 {
 	D3DXVECTOR3 pos = Get_Mouse();
@@ -199,11 +200,15 @@ void CBuilding::InstallBuilding()
 		{
 			BUILDINGDATA* pBuilding = new BUILDINGDATA;
 
-			//float	fX = (TILECX * j) + (i % 2) * (TILECX / 2.f);
-			//float	fY = (TILECY / 2.f) * i;
+			const TEXINFO* pTexInfo =
+				CTextureMgr::Get_Instance()->Get_Texture(
+					L"Building", m_strNowBuildingName,
+					0);
+			float	fCenterX = pTexInfo->tImgInfo.Width / 2.f;
+			float	fCenterY = pTexInfo->tImgInfo.Height / 2.f;
 
 			pBuilding->vPos = { pos.x, pos.y, 0.f };
-			pBuilding->vSize = { 64.f, 80.f };
+			pBuilding->vSize = { fCenterX, fCenterY };
 			pBuilding->strKeyName = m_strNowBuildingName;
 			m_vecBuilding.push_back(pBuilding);
 		}

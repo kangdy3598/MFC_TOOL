@@ -1,13 +1,17 @@
 ﻿// BuildingTool.cpp: 구현 파일
 //
-
 #include "stdafx.h"
+#include "BuildingTool.h"
+
 #include "Tool.h"
 #include "afxdialogex.h"
-#include "BuildingTool.h"
+
 #include "Device.h"
 #include "FilePath.h"
 #include "TextureMgr.h"
+#include "MainFrm.h"
+#include "MyFormView.h"
+
 
 // CBuilding 대화 상자
 
@@ -66,6 +70,7 @@ END_MESSAGE_MAP()
 BOOL CBuildingTool::OnInitDialog()
 {
 	CDialog::OnInitDialog();
+	m_radioBuildingRace[1].SetCheck(true);
 	OnDataLoad();
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
@@ -79,9 +84,16 @@ void CBuildingTool::OnBnClickedCreate()
 	BUILDINGDATA* pBuilding = new BUILDINGDATA;
 
 	pBuilding->strName = m_strName;
+	m_strName = L"";
+
 	pBuilding->iHP = m_iHP;
+	m_iHP = 0;
+
 	pBuilding->iShield = m_iShield;
+	m_iShield = 0;
+
 	pBuilding->iAttack = m_iAttack;
+	m_iAttack = 0;
 
 	//byBuildingRace
 	for (int i = 0; i < 3; ++i)
@@ -92,6 +104,7 @@ void CBuildingTool::OnBnClickedCreate()
 			break;
 		}
 	}
+	m_radioBuildingRace[1].SetCheck(true);
 
 	//btAttackType
 	pBuilding->byAttackType = 0x00;
@@ -102,10 +115,17 @@ void CBuildingTool::OnBnClickedCreate()
 	if (m_checkAttackType[1].GetCheck())
 		pBuilding->byAttackType |= ATTACK_SKY;
 
+	pBuilding->byAttackType = 0x00;
+	// image
+
+	pBuilding->strImgPath = m_strFullPath;
+	pBuilding->strKeyName = m_strKeyName;
+
 	m_ListBox.AddString(pBuilding->strName);
 
 	m_mapBuildingData.insert({ pBuilding->strName, pBuilding });
 
+	m_picture.SetBitmap(nullptr);
 	UpdateData(FALSE);
 }
 
@@ -302,18 +322,24 @@ void CBuildingTool::OnDataLoad()
 		DWORD	dwStrByte(0);
 		BUILDINGDATA tData{};
 
+		CMainFrame* pMainFrm = (CMainFrame*)AfxGetMainWnd();
+		CToolView* pToolView = pMainFrm->GetToolView();
+
+		HTREEITEM building = pToolView->Get_MyView()->building;
 		while (true)
 		{
+			//ReadFile(hFile, &(tData.vSize), sizeof(int), &dwByte, nullptr);
+
 			ReadFile(hFile, &dwStrByte, sizeof(DWORD), &dwByte, nullptr);
 			TCHAR* pName = new TCHAR[dwStrByte / 2];
 			ReadFile(hFile, pName, dwStrByte, &dwByte, nullptr);
-			if (0 == dwByte){ delete[]pName; break; }
+			if (0 == dwByte) { delete[]pName; break; }
 
 			//////////////////////////////////////////////////////////////////
 			ReadFile(hFile, &(tData.iHP), sizeof(int), &dwByte, nullptr);
 			ReadFile(hFile, &(tData.iAttack), sizeof(int), &dwByte, nullptr);
 			ReadFile(hFile, &(tData.iShield), sizeof(int), &dwByte, nullptr);
-			
+
 			ReadFile(hFile, &(tData.byBuildRace), sizeof(BYTE), &dwByte, nullptr);
 			ReadFile(hFile, &(tData.byAttackType), sizeof(BYTE), &dwByte, nullptr);
 
@@ -321,7 +347,7 @@ void CBuildingTool::OnDataLoad()
 			ReadFile(hFile, &dwStrByte, sizeof(DWORD), &dwByte, nullptr);
 			TCHAR* pPath = new TCHAR[dwStrByte / 2];
 			ReadFile(hFile, pPath, dwStrByte, &dwByte, nullptr);
-			if (0 == dwByte){ delete[]pPath; break; }
+			if (0 == dwByte) { delete[]pPath; break; }
 
 			//////////////////////////////////////////////////////////////////
 			ReadFile(hFile, &dwStrByte, sizeof(DWORD), &dwByte, nullptr);
@@ -345,7 +371,7 @@ void CBuildingTool::OnDataLoad()
 			pBuilding->iShield = tData.iShield;
 			pBuilding->byBuildRace = tData.byBuildRace;
 			pBuilding->byAttackType = tData.byAttackType;
-			
+
 			m_mapBuildingData.insert({ pBuilding->strName, pBuilding });
 
 			m_ListBox.AddString(pBuilding->strName);
@@ -357,8 +383,10 @@ void CBuildingTool::OnDataLoad()
 				AfxMessageBox(L"Building Texture Failed");
 				return;
 			}
-		}
 
+			pToolView->Get_MyView()->m_tree.InsertItem(
+				pBuilding->strName, 0, 0, building, TVI_LAST);
+		}
 		CloseHandle(hFile);
 	}
 
@@ -399,12 +427,18 @@ void CBuildingTool::OnBnClickedChangeImage()
 		
 		m_picture.SetBitmap((HBITMAP)*pImage);
 
-		m_tSelectBuildingData->strImgPath = str; // "C:\\ ~~~ Gateway\\0.png"
+		m_strFullPath = str; // "C:\\ ~~~ Gateway\\0.png"
 
-		//str.TrimLeft(szPath);
 		str.Replace(szPath, L"");	// "Gateway\\0.png"	
 		str.Replace(L"\\" + Dlg.GetFileName(), L""); // Gateway
-		m_tSelectBuildingData->strKeyName = str;
+		m_strKeyName = str;
+
+		if (m_tSelectBuildingData)
+		{
+			m_tSelectBuildingData->strImgPath = m_strFullPath;
+			m_tSelectBuildingData->strKeyName = m_strKeyName;
+		}
+
 	}
 
 	UpdateData(FALSE);

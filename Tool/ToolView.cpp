@@ -141,32 +141,13 @@ void CToolView::OnDraw(CDC* /*pDC*/)
     CDevice::Get_Instance()->Render_Begin();
 
     m_pTerrain->Render();
-
-
-	if (eMouseState == MouseState::MS_BUILDING)
-		m_pBuilding->PreviewRender();
-
-
     m_pUnit->Render();
-
     m_pBuilding->Render();
 
-    //m_pMiniView->OnDraw(nullptr);
-    /*TCHAR	szBuf[MIN_STR] = L"";
-
-    CDevice::Get_Instance()->Get_Font()->DrawTextW(
-        CDevice::Get_Instance()->Get_Sprite(),
-        szBuf, lstrlen(szBuf), nullptr, 0, D3DCOLOR_ARGB(255, 255, 255, 255));
-
-    swprintf_s(szBuf, L"X : %f, Y : %f", Get_Mouse().x,
-        Get_Mouse().y + GetScrollPosition().y);
-
-    D3DXMATRIX	matTrans2;
-    D3DXMatrixTranslation(&matTrans2, 100.f, 100.f, 0.f);
-    CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matTrans2);
-    CDevice::Get_Instance()->Get_Font()->DrawTextW(
-        CDevice::Get_Instance()->Get_Sprite(),
-        szBuf, lstrlen(szBuf), nullptr, 0, D3DCOLOR_ARGB(255, 255, 255, 255));*/
+    if (eMouseState == MouseState::MS_UNIT)
+        m_pUnit->PreviewRender();
+	if (eMouseState == MouseState::MS_BUILDING)
+		m_pBuilding->PreviewRender();
 
     CDevice::Get_Instance()->Render_End();
 }
@@ -190,13 +171,20 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 	if (eMouseState == MouseState::MS_NONE)
 		return;
 
-	if (eMouseState == MouseState::MS_BUILDING)
+	else if (eMouseState == MouseState::MS_BUILDING)
 	{
 		m_pBuilding->InstallBuilding();
 		m_pMiniView->OnDraw(nullptr);
 		Invalidate(FALSE);
 		return;
 	}
+    else if (eMouseState == MouseState::MS_UNIT)
+    {
+        m_pUnit->InstallUnit();
+        m_pMiniView->OnDraw(nullptr);
+        Invalidate(FALSE);
+        return;
+    }
 	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
 	CMyFormView* pMyForm = dynamic_cast<CMyFormView*>(
 		pMainFrm->m_SecondSplitter.GetPane(1, 0));
@@ -204,6 +192,7 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 
     CTileTool* pTileTool = &pMyForm->m_TileTool;
 
+<<<<<<< HEAD
     CUnitTool* pUnitTool = &pMyForm->m_UnitTool;
     m_listUnit.push_back(pUnitTool->Create_Unit(point + GetScrollPosition(), pUnitTool->Get_Index()));
 
@@ -220,6 +209,9 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
     m_pTerrain->Check_Picking(point + GetScrollPosition(), pTileTool);
 
 	//m_pTerrain->Check_Picking(point + GetScrollPosition(), pTileTool);
+=======
+	m_pTerrain->Check_Picking(point + GetScrollPosition(), pTileTool);
+>>>>>>> origin/main
 	m_pMiniView->OnDraw(nullptr);
 	
 	Invalidate();
@@ -227,8 +219,11 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 
 void CToolView::OnMouseMove(UINT nFlags, CPoint point)
 {
-
+    if (eMouseState == MouseState::MS_NONE)
+        return;
     CScrollView::OnMouseMove(nFlags, point);
+
+    Invalidate(FALSE);
    // AfxMessageBox(L"mouse move");
 }
 
