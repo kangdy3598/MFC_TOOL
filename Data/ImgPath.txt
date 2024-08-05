@@ -1,0 +1,1 @@
+Protoss|Arbiter|12|..\Texture\MultiTexture\Unit\Protoss\Arbiter\%d.png

@@ -45,6 +45,34 @@ public:
 
 }TILE;
 
+
+
+typedef struct tagUnit
+{
+	D3DXVECTOR3	vPos;
+	D3DXVECTOR3 vSize;
+
+	BYTE		byUnitType;
+	BYTE		byAttackType;
+
+public:
+	void SetUnitType()
+	{
+		byUnitType++;
+	}
+	void SetUnitType(int _UnitType)
+	{
+		byUnitType = _UnitType;
+	}
+
+
+}UNITCLASS;
+
+
+
+
+
+
 typedef	struct tagUnitData
 {
 #ifndef _AFX

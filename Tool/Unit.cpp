@@ -20,23 +20,20 @@ CUnit::~CUnit()
 	Release();
 }
 
-void CUnit::Check_Picking(CPoint _mousePosition, CTileTool* _CTileTool)
-{
-	
-}
-
 HRESULT CUnit::Initialize()
 {
-	if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(
-		L"../Texture/MultiTexture/Unit/Protoss/Dragoon/Stand/0.png",
-		TEX_MULTI, L"Unit", L"Unit", MAX_TILETYPE)))
-	{
-		AfxMessageBox(L"Unit Texture Failed");
-		return E_FAIL;
-	}
+
+	//if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(
+	//	L"../Texture/MultiTexture/Unit/Protoss/Dragoon/Stand/0.png",
+	//	
+	//	TEX_MULTI, L"Unit", L"Unit", MAX_TILETYPE)))
+	//{
+	//	AfxMessageBox(L"Unit Texture Failed");
+	//	return E_FAIL;
+	//}
+
 	
-	vPos.x = 100;
-	vPos.y = 100;
+	
 	return S_OK;
 }
 
@@ -73,8 +70,8 @@ void CUnit::Render()
 
 		CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
 
-		const TEXINFO* pTexInfo =
-			CTextureMgr::Get_Instance()->Get_Texture(L"Unit", L"Unit", 0);
+		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Unit", L"Dragoon", 1);
+		//const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(m_wstrObjKey.c_str(), m_wstrStateKey.c_str(), 0);
 
 		float	fCenterX = pTexInfo->tImgInfo.Width / 2.f;
 		float	fCenterY = pTexInfo->tImgInfo.Height / 2.f;

@@ -13,8 +13,8 @@
 IMPLEMENT_DYNCREATE(CMyFormView, CFormView)
 
 CMyFormView::CMyFormView()
-	: CFormView(IDD_MyFormView)
-	, m_bValue(false)
+    : CFormView(IDD_MyFormView)
+    , m_bValue(false)
     , iTreeIndex(0)
 {
 
@@ -38,6 +38,7 @@ BEGIN_MESSAGE_MAP(CMyFormView, CFormView)
     ON_NOTIFY(TVN_SELCHANGED, IDC_TREE1, &CMyFormView::OnTvnSelchangedTree)
     ON_NOTIFY(TVN_ITEMCHANGED, IDC_TREE1, &CMyFormView::OnTvnItemChangedTree)
     ON_BN_CLICKED(IDC_BUTTON7, &CMyFormView::OnBnClickedBuilding)
+    ON_BN_CLICKED(IDC_BUTTON4, &CMyFormView::OnBnClickedPathFind)
 END_MESSAGE_MAP()
 
 
@@ -69,11 +70,11 @@ void CMyFormView::OnInitialUpdate()
     CFont		m_Font;
     m_Font.CreatePointFont(180, L"궁서");
 
-    iTreeIndex = 1;
+    iTreeIndex = 0;
     CMainFrame* pMainFrm = (CMainFrame*)AfxGetMainWnd();
     CToolView* pToolView = pMainFrm->GetToolView();
     pToolView->Set_MyView(this);
-    
+
     root = m_tree.InsertItem((L"프로토스"), 0, 0, TVI_ROOT, TVI_LAST);
     unit = m_tree.InsertItem((L"유닛"), 0, 0, root, TVI_LAST);
     building = m_tree.InsertItem((L"건물"), 0, 0, root, TVI_LAST);
@@ -83,32 +84,36 @@ void CMyFormView::OnInitialUpdate()
 
 void CMyFormView::OnBnClickedUnit()
 {
+
+
     // TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
     if (nullptr == m_UnitTool.GetSafeHwnd())
         m_UnitTool.Create(IDD_UnitTool);
 
     m_UnitTool.ShowWindow(SW_SHOW);
 
+    if (m_UnitTool.Get_Selected())
+    {
+        CString strTreeName;
 
-    //HTREEITEM root = m_tree.InsertItem((L"프로토스"), 0, 0, TVI_ROOT, TVI_LAST);
-    //HTREEITEM unit = m_tree.InsertItem((L"유닛"), 0, 0, root, TVI_LAST);
-    //HTREEITEM building = m_tree.InsertItem((L"건물"), 0, 0, root, TVI_LAST);
+        strName = m_UnitTool.Get_Name();
 
-    CString strTreeName;
+        strTreeName.Format(_T("%s"), strName);
 
-    strTreeName.Format(_T("%d"), iTreeIndex);
-    m_tree.InsertItem(strTreeName, 0, 0, unit, TVI_LAST);
-    iTreeIndex++;
+        m_tree.InsertItem(strTreeName, 0, 0, unit, TVI_LAST);
+
+        m_UnitTool.Set_Selected(false);
+    }
 }
 
 void CMyFormView::OnBnClickedTile()
 {
+
     // TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
     if (nullptr == m_TileTool.GetSafeHwnd())
         m_TileTool.Create(IDD_TileTool);
 
     m_TileTool.ShowWindow(SW_SHOW);
-
 }
 
 void CMyFormView::OnBnClickedBuilding()
@@ -120,6 +125,15 @@ void CMyFormView::OnBnClickedBuilding()
     m_BuildingTool.ShowWindow(SW_SHOW);
 }
 
+void CMyFormView::OnBnClickedPathFind()
+{
+    if (nullptr == m_PathFind.GetSafeHwnd())
+        m_PathFind.Create(IDD_PATHFIND);
+
+    m_PathFind.ShowWindow(SW_SHOW);
+}
+
+
 void CMyFormView::OnBnClickedSave()
 {
     CFileDialog		Dlg(FALSE,	// TRUE(불러오기), FALSE(다른 이름으로 저장)
@@ -128,7 +142,6 @@ void CMyFormView::OnBnClickedSave()
         OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, // OFN_HIDEREADONLY(일기 전용 체크박스 숨김 옵션), OFN_OVERWRITEPROMPT(중복 파일 저장 시, 경고 메시지 띄움 옵션)
         L"Data Files(*.dat)|*.dat||", // 콤보 박스에 출력될 문자열
         this);	// 부모 윈도우 주소
-
 
     TCHAR		szPath[MAX_PATH] = L"";
 
@@ -174,7 +187,7 @@ void CMyFormView::OnBnClickedSave()
 
 void CMyFormView::SetTreeListOnProtoss()
 {
-    
+
 }
 
 void CMyFormView::SetTreeListOnEtc()
@@ -191,69 +204,67 @@ void CMyFormView::SetTreeListOnEtc()
 
 void CMyFormView::Render()
 {
-	if (!m_bValue)
-		return;
-	D3DXMATRIX		matWorld, matScale, matTrans;
+    if (!m_bValue)
+        return;
+    D3DXMATRIX		matWorld, matScale, matTrans;
 
-	TCHAR	szBuf[MIN_STR] = L"";
+    TCHAR	szBuf[MIN_STR] = L"";
 
-	//for (auto pTile : m_vecTile)
-	{
-		D3DXMatrixIdentity(&matWorld);
-		D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
-		D3DXMatrixTranslation(&matTrans,
-			300,
-			300, 0.f);
+    //for (auto pTile : m_vecTile)
+    {
+        D3DXMatrixIdentity(&matWorld);
+        D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
+        D3DXMatrixTranslation(&matTrans,
+            300,
+            300, 0.f);
 
-		matWorld = matScale * matTrans;
+        matWorld = matScale * matTrans;
 
-		RECT	rc{};
+        RECT	rc{};
 
-		// GetClientRect : 클라이언트 영역에 해당하는 RECT 정보를 얻어오는 함수
-		//GetClientRect(m_ToolView->m_hWnd, &rc);
+        // GetClientRect : 클라이언트 영역에 해당하는 RECT 정보를 얻어오는 함수
+        //GetClientRect(m_ToolView->m_hWnd, &rc);
 
-		float	fRatioX = WINCX / float(rc.right - rc.left);
-		float	fRatioY = WINCY / float(rc.bottom - rc.top);
+        float	fRatioX = WINCX / float(rc.right - rc.left);
+        float	fRatioY = WINCY / float(rc.bottom - rc.top);
 
-		//Set_Ratio(&matWorld, fRatioX, fRatioY);
+        //Set_Ratio(&matWorld, fRatioX, fRatioY);
 
-		CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
+        CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
 
-		const TEXINFO* pTexInfo =
-			CTextureMgr::Get_Instance()->Get_Texture(L"Building", L"Building");
+        const TEXINFO* pTexInfo =
+            CTextureMgr::Get_Instance()->Get_Texture(L"Building", L"Building");
 
-		float	fCenterX = pTexInfo->tImgInfo.Width / 2.f;
-		float	fCenterY = pTexInfo->tImgInfo.Height / 2.f;
+        float	fCenterX = pTexInfo->tImgInfo.Width / 2.f;
+        float	fCenterY = pTexInfo->tImgInfo.Height / 2.f;
 
-		HRESULT result = CDevice::Get_Instance()->Get_Sprite()->Draw(
-			pTexInfo->pTexture,
-			nullptr,
-			&D3DXVECTOR3(fCenterX, fCenterY, 0.f), 
-			nullptr,
-			D3DCOLOR_ARGB(255, 255, 255, 255));
+        HRESULT result = CDevice::Get_Instance()->Get_Sprite()->Draw(
+            pTexInfo->pTexture,
+            nullptr,
+            &D3DXVECTOR3(fCenterX, fCenterY, 0.f),
+            nullptr,
+            D3DCOLOR_ARGB(255, 255, 255, 255));
 
-	}
-
-
+    }
 }
 
 void CMyFormView::OnTvnSelchangedTree(NMHDR* pNMHDR, LRESULT* pResult)
 {
-	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	*pResult = 0;
+    LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
+    // TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+    *pResult = 0;
 
-
-
-	HTREEITEM hSelected = m_tree.GetSelectedItem();
-	CString SelectedName = m_tree.GetItemText(hSelected);
-	if (!lstrcmp(SelectedName, L"게이트웨이"))
-	{
-		m_bValue = true;
-		CMainFrame* pMainFrm = (CMainFrame*)AfxGetMainWnd();
-		CToolView* pToolView = pMainFrm->GetToolView();
-		pToolView->OnDraw(nullptr);
-	}
+    HTREEITEM hSelected = m_tree.GetSelectedItem();
+    CString SelectedName = m_tree.GetItemText(hSelected);
+    if (!lstrcmp(SelectedName, m_UnitTool.Get_Name()))
+    {
+        m_bValue = true;
+        CMainFrame* pMainFrm = (CMainFrame*)AfxGetMainWnd();
+        CToolView* pToolView = pMainFrm->GetToolView();
+        //pToolView->OnDraw(nullptr);
+        //pToolView->OnDraw(nullptr);
+        m_UnitTool.ShowWindow(SW_SHOW);
+    }
 }
 
 void CMyFormView::OnTvnItemChangedTree(NMHDR* pNMHDR, LRESULT* pResult)
@@ -262,4 +273,6 @@ void CMyFormView::OnTvnItemChangedTree(NMHDR* pNMHDR, LRESULT* pResult)
     // TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
     *pResult = 0;
 }
+
+
 

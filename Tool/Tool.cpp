@@ -185,5 +185,3 @@ void CToolApp::test()
 // CToolApp 메시지 처리기
 
 
-
-

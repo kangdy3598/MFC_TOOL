@@ -13,6 +13,7 @@
 #define IDD_TileTool                    312
 #define IDD_BuildingTool                313
 #define IDD_UNITIMAGEBOX                315
+#define IDD_PATHFIND                    316
 #define IDC_BUTTON1                     1000
 #define IDC_LIST1                       1002
 #define IDC_EDIT1                       1003
@@ -32,6 +33,7 @@
 #define IDC_BUTTON6                     1016
 #define IDC_TREE1                       1017
 #define IDC_RADIO3                      1018
+#define IDC_BUTTON8                     1018
 #define IDC_EDIT5                       1019
 #define IDC_RADIO4                      1020
 
@@ -39,14 +41,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        319
+#define _APS_NEXT_RESOURCE_VALUE        320
 #define _APS_NEXT_COMMAND_VALUE         32771
-<<<<<<< HEAD
-#define _APS_NEXT_CONTROL_VALUE         1022
-#define _APS_NEXT_SYMED_VALUE           315
-=======
-#define _APS_NEXT_CONTROL_VALUE         1018
-#define _APS_NEXT_SYMED_VALUE           316
->>>>>>> origin/main
+#define _APS_NEXT_CONTROL_VALUE         1019
+#define _APS_NEXT_SYMED_VALUE           317
 #endif
 #endif

@@ -16,9 +16,6 @@
     <ClCompile Include="Building.cpp">
       <Filter>05. Etc\04. Building</Filter>
     </ClCompile>
-    <ClCompile Include="Unit.cpp">
-      <Filter>05. Etc\03. Unit</Filter>
-    </ClCompile>
     <ClCompile Include="ToolDoc.cpp">
       <Filter>03. ToolDoc</Filter>
     </ClCompile>
@@ -61,6 +58,12 @@
     <ClCompile Include="MyFormView.cpp">
       <Filter>02. ToolView\01. MyView</Filter>
     </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>05. Etc\03. Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="PathFind.cpp">
+      <Filter>05. Etc\01. Dialog\03.PathFind</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tool.h">
@@ -86,9 +89,6 @@
     </ClInclude>
     <ClInclude Include="Building.h">
       <Filter>05. Etc\04. Building</Filter>
-    </ClInclude>
-    <ClInclude Include="Unit.h">
-      <Filter>05. Etc\03. Unit</Filter>
     </ClInclude>
     <ClInclude Include="ToolView.h">
       <Filter>02. ToolView</Filter>
@@ -128,6 +128,12 @@
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>04. Manager\01. TextureManager\00. Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>05. Etc\03. Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="PathFind.h">
+      <Filter>05. Etc\01. Dialog\03.PathFind</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -187,9 +193,6 @@
     <Filter Include="05. Etc\01. Dialog">
       <UniqueIdentifier>{71169075-c1ec-4335-b439-b2ae9b7b0cda}</UniqueIdentifier>
     </Filter>
-    <Filter Include="05. Etc\02. FilePath">
-      <UniqueIdentifier>{35469d75-adbb-49db-92a2-7b1cf3f9c1a2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="04. Manager\00. Device">
       <UniqueIdentifier>{e0c30fb0-f075-4608-b392-95d94c676bb6}</UniqueIdentifier>
     </Filter>
@@ -213,6 +216,12 @@
     </Filter>
     <Filter Include="05. Etc\01. Dialog\02. BuildingTool">
       <UniqueIdentifier>{a34dc013-0d4a-42da-9090-f2741825e341}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Etc\02. FilePath">
+      <UniqueIdentifier>{35469d75-adbb-49db-92a2-7b1cf3f9c1a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Etc\01. Dialog\03.PathFind">
+      <UniqueIdentifier>{d3801505-6ff1-43d4-8100-a1d8a83ff0a7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

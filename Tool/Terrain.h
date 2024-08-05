@@ -16,6 +16,11 @@ public:
 	void		Set_ToolView(CToolView* pToolView) { m_ToolView = pToolView; }
 	void		Check_Picking(CPoint _mousePosition, CTileTool* _CTileTool);
 
+
+
+
+
+
 	vector<TILE*>& Get_VecTile() { return m_vecTile; }
 public:
 	HRESULT		Initialize();
@@ -26,8 +31,19 @@ public:
 
 private:
 	vector<TILE*>		m_vecTile;
+
+
+
+
+
+
+
+
 	CToolView* m_ToolView;
 	CMiniView* m_MiniView;
-
 	void		Set_Ratio(D3DXMATRIX* pOut, float fX, float fY);
+
+
+
+	
 };

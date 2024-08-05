@@ -49,6 +49,12 @@
     <Filter Include="01. Manager\03. ObjectManager\00. Object\00. MyTerrain">
       <UniqueIdentifier>{f76e3123-e8e3-439b-8a52-1522b9369892}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Manager\03. ObjectManager\00. Object\01.Unit">
+      <UniqueIdentifier>{31b30eda-e429-4506-8467-711bb53b9b13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\03. ObjectManager\00. Object\01.Unit\Zealot">
+      <UniqueIdentifier>{8259e30f-08ab-4172-8ba4-469d0ad9a319}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -102,6 +108,9 @@
     <ClInclude Include="Client.h">
       <Filter>00. MainGame</Filter>
     </ClInclude>
+    <ClInclude Include="Zealot.h">
+      <Filter>01. Manager\03. ObjectManager\00. Object\01.Unit\Zealot</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainGame.cpp">
@@ -145,6 +154,9 @@
     </ClCompile>
     <ClCompile Include="Client.cpp">
       <Filter>00. MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Zealot.cpp">
+      <Filter>01. Manager\03. ObjectManager\00. Object\01.Unit\Zealot</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

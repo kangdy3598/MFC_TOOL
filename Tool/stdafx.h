@@ -60,6 +60,8 @@
 #include <list>
 #include <atlimage.h>
 
+#include <fstream>
+
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
 

@@ -378,12 +378,14 @@ void CBuildingTool::OnBnClickedChangeImage()
 			return;
 		
 		CloseHandle(hFile); // 파일 스트림 닫고 경로를 저장한 변수를 Load할 것!!
+
 		CImage* pImage = new CImage;
 		pImage->Load(str);
 		
 		m_picture.SetBitmap((HBITMAP)*pImage);
 
-		m_tSelectBuildingData->strImgPath = str;
+		//m_tSelectBuildingData->strImgPath = str;
+
 	}
 
 	UpdateData(FALSE);
