@@ -10,6 +10,11 @@
 #include "MainFrm.h"
 #include "FilePath.h"
 
+#include "MyFormView.h"
+
+#include "PathFind.h"
+
+
 // CUnitTool 대화 상자
 
 IMPLEMENT_DYNAMIC(CUnitTool, CDialog)
@@ -20,12 +25,27 @@ CUnitTool::CUnitTool(CWnd* pParent /*=nullptr*/)
     , m_iHP(0)
     , m_strSearchName(_T(""))
     , m_bSelected(false)
+    , m_stateNameKey(_T(""))
 {
 
 }
 
 CUnitTool::~CUnitTool()
 {
+}
+
+CUnit* CUnitTool::Create_Unit(CPoint _pos, int _iUnitIndex)
+{
+    CUnit* pUnit = new CUnit;
+
+    _pos.x = LONG(Get_Mouse().x);
+    _pos.y = LONG(Get_Mouse().y);
+
+    _iUnitIndex = iIndex;
+
+    pUnit->Set_Pos(_pos);
+
+    return pUnit;
 }
 
 void CUnitTool::DoDataExchange(CDataExchange* pDX)
@@ -44,6 +64,7 @@ void CUnitTool::DoDataExchange(CDataExchange* pDX)
     DDX_Control(pDX, IDC_EDIT4, m_searchName);
 
     DDX_Control(pDX, IDC_PICTURE, m_Picture);
+    DDX_Text(pDX, IDC_EDIT5, m_stateNameKey);
 }
 
 
@@ -55,6 +76,7 @@ BEGIN_MESSAGE_MAP(CUnitTool, CDialog)
     ON_BN_CLICKED(IDC_BUTTON5, &CUnitTool::OnBnClickedSave)
     ON_BN_CLICKED(IDC_BUTTON6, &CUnitTool::OnBnClickedLoad)
     ON_LBN_SELCHANGE(IDC_LIST1, &CUnitTool::OnListBoxSelChange)
+    ON_BN_CLICKED(IDOK, &CUnitTool::OnBnClickedOk)
 END_MESSAGE_MAP()
 
 
@@ -65,6 +87,9 @@ void CUnitTool::OnBnClickedCreate()
 {
     // TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
     UpdateData(TRUE);
+
+
+
 
     UNITDATA* pUnit = new UNITDATA;
 
@@ -91,25 +116,64 @@ void CUnitTool::OnBnClickedCreate()
     if (m_checkAttackType[1].GetCheck())
         pUnit->byAttackType |= ATTACK_SKY;
 
-    //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    CFileDialog		Dlg(TRUE,	// TRUE(불러오기), FALSE(다른 이름으로 저장)
+        L"png", // default 확장자명
+        L"*.png", // 대화 상자에 표시될 최초 파일명
+        OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, // OFN_HIDEREADONLY(일기 전용 체크박스 숨김 옵션), OFN_OVERWRITEPROMPT(중복 파일 저장 시, 경고 메시지 띄움 옵션)
+        L"이미지 파일(*.jpg, *.png)|*jpg;*.jpeg;*png||", // 콤보 박스에 출력될 문자열
+        this);	// 부모 윈도우 주소
 
-    CString strPathName;
-    CString strFileName;
+    TCHAR		szPath[MAX_PATH] = L"";
+    TCHAR	szFileName[MAX_STR] = L"";
 
-    TCHAR szFilter[] = _T("*.*||");
-    CFileDialog Dlg(TRUE, NULL, NULL, OFN_HIDEREADONLY, szFilter);
+    GetCurrentDirectory(MAX_PATH, szPath);
+    PathRemoveFileSpec(szPath);
+
+    lstrcat(szPath, L"..\\Texture\\MultiTexture\\Unit\\Protoss\\");
+
+    Dlg.m_ofn.lpstrInitialDir = szPath;
 
     if (IDOK == Dlg.DoModal())
     {
-        strPathName = Dlg.GetPathName();
-        strFileName = Dlg.GetFileName();
+        CString	str = Dlg.GetPathName().GetString();
+        const TCHAR* pGetPath = str.GetString();
+
+        HANDLE hFile = CreateFile(pGetPath, GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+
+        if (INVALID_HANDLE_VALUE == hFile)
+            return;
+
+        //m_wstrStateKey = wstring(m_stateNameKey);
+
+        CloseHandle(hFile); // 파일 스트림 닫고 경로를 저장한 변수를 Load할 것!!
+
+        CString	strFileName = PathFindFileName(str);
+        lstrcpy(szFileName, strFileName.GetString());
+        PathRemoveExtension(szFileName);
+
+        strFileName = szFileName;
+
+        auto iter = m_MapPngUnitImg.find(strFileName);
+
+        if (iter == m_MapPngUnitImg.end())
+        {
+            CImage* pImage = new CImage;
+            pImage->Load(str);
+
+            m_MapPngUnitImg.insert({ m_strName, pImage });
+            //m_Picture.SetBitmap((HBITMAP)*pImage);
+
+            //
+
+            //CTextureMgr::Get_Instance()->Insert_Texture(str, TEX_MULTI, L"Unit", m_strNameKey.GetString(), 10);
+            CTextureMgr::Get_Instance()->Insert_Texture(str, TEX_MULTI, L"Unit", L"Dragoon", 12);
+            //CTextureMgr::Get_Instance()->Insert_Texture(str, TEX_MULTI, L"Unit", m_wstrStateKey.c_str(), 12);
+
+        }
     }
 
-    CString cstrTmp;
-    strPathName.TrimRight(strFileName);
-    strPathName.TrimRight(_T("\\"));
-
-    m_ListBox.AddString(m_strName);
+    m_ListBox.AddString(pUnit->strName);
+    m_mapUnitData.insert({ pUnit->strName,pUnit });
 
     UpdateData(FALSE);
 }
@@ -122,7 +186,7 @@ void CUnitTool::OnBnClickedDelete()
     CString		strFindName;
 
     // GetCurSel :리스트 박스 목록 중, 선택된 셀의 인덱스를 반환
-    int	iIndex = m_ListBox.GetCurSel();
+    /* int	*/ iIndex = m_ListBox.GetCurSel();
 
     if (LB_ERR == iIndex)
         return;
@@ -312,35 +376,59 @@ void CUnitTool::OnListBoxSelChange()
     UpdateData(TRUE);
     CString		strFindName;
 
-    int	iIndex = m_ListBox.GetCurSel();
+    /*int */ iIndex = m_ListBox.GetCurSel();
 
     if (LB_ERR == iIndex)
         return;
 
-    CString path, fileName;
+    m_ListBox.GetText(iIndex, strFindName);
 
-    path = L"..\\Texture\\MultiTexture\\Unit\\Protoss\\Dragoon\\Stand\\";
+    auto iter = m_mapUnitData.find(strFindName);
 
-    for (int i = 0; i < 8; ++i)
-    {
-        CImage* pPngImage = new CImage;
-
-        fileName.Format(L"%d.png", i);
-        pPngImage->Load(path + fileName);
-
-        m_MapPngUnitImg.insert({ fileName, pPngImage });
-
-    }
-
-    auto iter = m_MapPngUnitImg.find(fileName);
-
-    if (iter == m_MapPngUnitImg.end())
+    if (iter == m_mapUnitData.end())
         return;
 
-    m_Picture.SetBitmap(*(iter->second));
+    m_strName = iter->second->strName;
+    m_iHP = iter->second->iHP;
+    m_iAttack = iter->second->iAttack;
+
+    for (int i = 0; i < 2; ++i)
+    {
+        m_radioUnitType[i].SetCheck(FALSE);
+        m_checkAttackType[i].SetCheck(FALSE);
+    }
+
+    if (iter->second->byAttackType & ATTACK_GROUND)
+        m_checkAttackType[0].SetCheck(TRUE);
+
+    if (iter->second->byAttackType & ATTACK_SKY)
+        m_checkAttackType[1].SetCheck(TRUE);
+
+
+    m_radioUnitType[iter->second->byUnitType].SetCheck(TRUE);
+
+    //----------------------------------------------------------------
+
+    m_ListBox.GetText(iIndex, strFindName);
+
+    auto iterImage = m_MapPngUnitImg.find(strFindName);
+
+    if (iterImage == m_MapPngUnitImg.end())
+        return;
+
+    m_Picture.SetBitmap(*(iterImage->second));
+
+    UpdateData(FALSE);
+}
+
+
+
+void CUnitTool::OnBnClickedOk()
+{
+    // TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+    CDialog::OnOK();
 
     m_bSelected = true;
 
-    UpdateData(FALSE);
 }
 

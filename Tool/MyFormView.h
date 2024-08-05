@@ -6,6 +6,7 @@
 
 #include "UnitTool.h"
 #include "TileTool.h"
+#include "PathFind.h"
 #include "BuildingTool.h"
 
 class CMainFrame;
@@ -40,6 +41,7 @@ public:
 	afx_msg void OnBnClickedTile();
 	afx_msg void OnBnClickedSave();
 	afx_msg void OnBnClickedBuilding();
+	afx_msg void OnBnClickedPathFind();
 
 	afx_msg void OnTvnSelchangedTree(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnTvnItemChangedTree(NMHDR* pNMHDR, LRESULT* pResult);
@@ -48,21 +50,29 @@ public:
 	void SetTreeListOnEtc();
 	void Render(CPoint pt);
 
+<<<<<<< HEAD
 	void Set_ToolView();
 
+=======
+	CTreeCtrl& Get_TreeCtrl() { return m_tree; }
+>>>>>>> origin/main
 public:
 	CUnitTool m_UnitTool;
 	CTileTool m_TileTool;
+	CPathFind m_PathFind;
 	CBuildingTool m_BuildingTool;
 	CToolView* m_pToolView;
 
 	CTreeCtrl m_tree;
 
 	int iTreeIndex;
+	CString	strName;
+
 
 	HTREEITEM root;
 	HTREEITEM unit;
 	HTREEITEM building;
+
 
 };
 

@@ -11,7 +11,6 @@
 CTerrain::CTerrain()
 	: m_ToolView()
 	, m_MiniView()
-
 {
 	m_vecTile.reserve(TILEX * TILEY);
 }
@@ -93,7 +92,6 @@ HRESULT CTerrain::Initialize()
 			m_vecTile.push_back(pTile);
 		}
 	}
-
 	return S_OK;
 }
 
@@ -108,6 +106,7 @@ void CTerrain::Render(int _type)
 	TCHAR	szBuf[MIN_STR] = L"";
 	int		iIndex(0);
 
+	// Terrain에 Tile 그리기.
 	for (auto pTile : m_vecTile)
 	{
 		D3DXMatrixIdentity(&matWorld);
@@ -180,7 +179,7 @@ void CTerrain::Render(int _type)
 
 		++iIndex;
 	}
-	
+
 }
 
 void CTerrain::MiniRender()

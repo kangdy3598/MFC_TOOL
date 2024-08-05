@@ -65,7 +65,12 @@ public:
 	void SetMouseState(MouseState _mouseState) { eMouseState = _mouseState; }
 public:
 	CTerrain* m_pTerrain;
-	CUnit* m_pUnit;
+	//CUnit* m_pUnit;
+
+	list<CUnit*>	m_listUnit;
+	//list<CUnit*>::iterator m_iterListUnit;
+
+
 	CBuilding* m_pBuilding;
 
 	CMiniView* m_pMiniView;

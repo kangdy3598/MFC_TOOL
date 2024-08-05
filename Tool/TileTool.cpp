@@ -18,7 +18,7 @@ CTileTool::CTileTool(CWnd* pParent /*=nullptr*/)
 {
 }
 
-CTileTool::~CTileTool()
+CTileTool::~CTileTool()	
 {
 }
 

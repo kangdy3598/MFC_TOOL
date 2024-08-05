@@ -7,6 +7,9 @@
 
 #include "UnitImageBox.h"
 
+
+#include "Unit.h"
+
 class CUnitTool : public CDialog
 {
 	DECLARE_DYNAMIC(CUnitTool)
@@ -21,6 +24,8 @@ public:
 #endif
 
 public:
+	CString	Get_Name() { return m_strName; }
+
 	CString m_strName;
 	CStatic m_Picture;
 
@@ -38,26 +43,36 @@ public:
 
 	map<CString, UNITDATA*>		m_mapUnitData;
 	map<CString, UNITDATA*>		Get_UnitData() { return m_mapUnitData; }
-
-
-
+	UNITDATA*					m_tSelectUnitData;
 
 	map<CString, CImage*>		m_MapPngUnitImg;
-	void Set_PngImg(map<CString, CImage*> _pngImage, int _iIndex) { m_MapPngUnitImg = _pngImage; m_iIndex = _iIndex; }
+	void Set_PngImg(map<CString, CImage*> _pngImage, int _iIndex) { m_MapPngUnitImg = _pngImage; iIndex = _iIndex; }
 
-	
+	int Get_Index() { return iIndex; }
+	void Set_Index(int _iIndex) { iIndex = _iIndex; }
+
+	bool Get_Selected() { return m_bSelected; }
+	void Set_Selected(bool _bSelected) { m_bSelected = _bSelected; }
+
+
+	// Unit 생성함수
+	CUnit* Create_Unit(CPoint _pos, int _iUnitIndex);
+
+	wstring Get_ObjKey() { return m_wstrObjKey; }
+	wstring Get_StateKey() { return m_wstrStateKey; }
 
 
 public:
 	CUnitImageBox		m_UnitImageWnd;
 	CString				m_ImgName;
-	int					m_iIndex;
+
+
+	CString m_stateNameKey;
+	wstring					m_wstrObjKey = L"";
+	wstring					m_wstrStateKey = L"";
+
+	int					iIndex;
 	bool				m_bSelected;
-
-
-	void Set_UnitAdd(bool _bUnitAdded) { m_bSelected = _bUnitAdded; }
-	bool Get_UnitAdd() { return m_bSelected; }
-
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
@@ -73,4 +88,5 @@ public:
 	afx_msg void OnBnClickedLoad();
 	afx_msg void OnListBoxSelChange();
 
+	afx_msg void OnBnClickedOk();
 };
