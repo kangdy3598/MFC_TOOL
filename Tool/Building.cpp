@@ -26,22 +26,22 @@ void CBuilding::Check_Picking(CPoint _mousePosition, CTileTool* _CTileTool)
 
 HRESULT CBuilding::Initialize()
 {
-	/*if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(
+	if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(
 		L"../Texture/MultiTexture/Build/Protoss/GateWay/0.png",
 		TEX_MULTI, L"Building", L"GateWay", MAX_TILETYPE)))
 	{
 		AfxMessageBox(L"Building Texture Failed");
 		return E_FAIL;
-	}*/
+	}
 
 
-	/*if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(
+	if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(
 		L"../Texture/MultiTexture/Build/Protoss/Forge/0.png",
 		TEX_MULTI, L"Building", L"Forge", MAX_TILETYPE)))
 	{
 		AfxMessageBox(L"Building Texture Failed");
 		return E_FAIL;
-	}*/
+	}
 	return S_OK;
 }
 

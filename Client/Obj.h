@@ -29,10 +29,12 @@ public:
 	virtual void		Release(void)PURE;
 
 protected:
+	void			Move_Frame();
 
 protected:
 
 	INFO					m_tInfo;
+	FRAME					m_tFrame;
 	wstring					m_wstrObjKey = L"";
 	wstring					m_wstrStateKey = L"";
 	static		D3DXVECTOR3	m_vScroll;

@@ -34,6 +34,7 @@ BEGIN_MESSAGE_MAP(CToolView, CScrollView)
 	ON_WM_LBUTTONDOWN()
 	ON_WM_MOUSEMOVE()
 	ON_WM_KEYDOWN()
+    ON_WM_MOUSEWHEEL()
 END_MESSAGE_MAP()
 
 // CToolView »ý¼º/¼Ò¸ê
@@ -175,7 +176,7 @@ void CToolView::OnDestroy()
     CScrollView::OnDestroy();
 
     Safe_Delete(m_pTerrain);
-    //Safe_Delete(m_pUnit);
+    Safe_Delete(m_pUnit);
     Safe_Delete(m_pBuilding);
 
     CTextureMgr::Get_Instance()->Destroy_Instance();
@@ -218,7 +219,7 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 
     m_pTerrain->Check_Picking(point + GetScrollPosition(), pTileTool);
 
-	m_pTerrain->Check_Picking(point + GetScrollPosition(), pTileTool);
+	//m_pTerrain->Check_Picking(point + GetScrollPosition(), pTileTool);
 	m_pMiniView->OnDraw(nullptr);
 	
 	Invalidate();
@@ -295,6 +296,24 @@ void CToolView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		eMouseState = MouseState::MS_NONE;
 		break;
 	}
+}
 
 
+BOOL CToolView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
+{
+    if (zDelta > 0)
+    {
+        m_pTerrain->Set_WideValueX(0.1f);
+        m_pTerrain->Set_WideValueY(0.1f);
+    }
+    else
+    {
+        m_pTerrain->Set_WideValueX(-0.1f);
+        m_pTerrain->Set_WideValueY(-0.1f);
+    }
+
+    ScreenToClient(&pt);
+    Invalidate();
+    
+    return CScrollView::OnMouseWheel(nFlags, zDelta, pt);
 }

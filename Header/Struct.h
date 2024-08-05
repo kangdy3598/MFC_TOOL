@@ -40,8 +40,9 @@ public:
 			return;
 		byDrawID = _ID;
 	}
-	//int			iIndex = 0;			// 현재 타일 인덱스 정보
-	//int			iParentIdx = 0;		// 이전 타일 인덱스 정보
+
+	int			iIndex = 0;			// 현재 타일 인덱스 정보
+	int			iParentIdx = 0;		// 이전 타일 인덱스 정보
 
 }TILE;
 
@@ -99,7 +100,7 @@ typedef	struct tagBuildingData
 #ifndef _AFX
 	wstring	strName;
 	wstring strImgPath;
-	wString strKeyName;
+	wstring strKeyName;
 #else
 	CString	strName;
 	CString strImgPath;

@@ -52,8 +52,14 @@
     <Filter Include="01. Manager\03. ObjectManager\00. Object\01.Unit">
       <UniqueIdentifier>{31b30eda-e429-4506-8467-711bb53b9b13}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Manager\03. ObjectManager\00. Object\01.Unit\Zealot">
-      <UniqueIdentifier>{8259e30f-08ab-4172-8ba4-469d0ad9a319}</UniqueIdentifier>
+    <Filter Include="01. Manager\03. ObjectManager\00. Object\02.Building">
+      <UniqueIdentifier>{0659789a-338b-41ae-a428-cd9c75f7f520}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\04.TiemMgr">
+      <UniqueIdentifier>{922d9a6d-1110-4ddb-a977-da906b9d6ebd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Manager\05.AstarManager">
+      <UniqueIdentifier>{a62b43b7-8c3d-4a18-afc7-f704728984ba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -65,9 +71,6 @@
     </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="MainGame.h">
-      <Filter>00. MainGame</Filter>
     </ClInclude>
     <ClInclude Include="Device.h">
       <Filter>01. Manager\00. Device</Filter>
@@ -106,10 +109,22 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Client.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
       <Filter>00. MainGame</Filter>
     </ClInclude>
-    <ClInclude Include="Zealot.h">
-      <Filter>01. Manager\03. ObjectManager\00. Object\01.Unit\Zealot</Filter>
+    <ClInclude Include="MyBuilding.h">
+      <Filter>01. Manager\03. ObjectManager\00. Object\02.Building</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>01. Manager\04.TiemMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="AstarManager.h">
+      <Filter>01. Manager\05.AstarManager</Filter>
+    </ClInclude>
+    <ClInclude Include="MyUnit.h">
+      <Filter>01. Manager\03. ObjectManager\00. Object\01.Unit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -153,10 +168,19 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Client.cpp">
-      <Filter>00. MainGame</Filter>
+      <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Zealot.cpp">
-      <Filter>01. Manager\03. ObjectManager\00. Object\01.Unit\Zealot</Filter>
+    <ClCompile Include="MyBuilding.cpp">
+      <Filter>01. Manager\03. ObjectManager\00. Object\02.Building</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>01. Manager\04.TiemMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="AstarManager.cpp">
+      <Filter>01. Manager\05.AstarManager</Filter>
+    </ClCompile>
+    <ClCompile Include="MyUnit.cpp">
+      <Filter>01. Manager\03. ObjectManager\00. Object\01.Unit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -171,5 +195,8 @@
     <Image Include="Client.ico">
       <Filter>리소스 파일</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

@@ -3,6 +3,9 @@
 #include "TextureMgr.h"
 #include "ObjMgr.h"
 #include "MyTerrain.h"
+#include "MyBuilding.h"
+#include "MyUnit.h"
+
 
 CStage::CStage()
 {
@@ -23,22 +26,40 @@ HRESULT CStage::Ready_Scene()
 		return E_FAIL;
 	}	
 
+	if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(L"../Texture/MultiTexture/Unit/Protoss/Zealot/Move0/%d.png",
+		TEX_MULTI, L"Unit", L"Dragoon", 8)))
+	{
+		ERR_MSG(L"Player Img Insert Failed");
+		return E_FAIL;
+	}
+
 	CObj*	pObj = new CMyTerrain;
 
 	if (nullptr == pObj)
 		return E_FAIL;
 
+
 	pObj->Initialize();
 	CObjMgr::Get_Instance()->Add_Object(CObjMgr::TERRAIN, pObj);
 
-	// 플레이어
-	/*pObj = new CPlayer;
-	if (nullptr == pObj)
+
+	// building
+	CObj* pObj2 = new CMyBuilding;
+	
+	if (nullptr == pObj2)
 		return E_FAIL;
 
-	pObj->Initialize();
+	pObj2->Initialize();
+	CObjMgr::Get_Instance()->Add_Object(CObjMgr::BUILDING, pObj2);
 
-	CObjMgr::Get_Instance()->Add_Object(CObjMgr::PLAYER, pObj);*/
+	// 플레이어
+	CObj* pObj3 = new CMyUnit;
+
+	if (nullptr == pObj3)
+		return E_FAIL;
+
+	pObj3->Initialize();
+	CObjMgr::Get_Instance()->Add_Object(CObjMgr::PLAYER, pObj3);
 	
 	return S_OK;
 }

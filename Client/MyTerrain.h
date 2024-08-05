@@ -7,6 +7,10 @@ public:
 	virtual ~CMyTerrain();
 
 public:
+	vector<TILE*>& GetVecTile() { return m_vecTile; }
+	vector<list<TILE*>>& GetVecAdj() { return m_vecAdj; }
+
+public:
 	virtual HRESULT Initialize(void) override;
 	virtual int Update(void) override;
 	virtual void Late_Update(void) override;
@@ -16,7 +20,11 @@ public:
 private:
 	HRESULT		Load_Tile(const TCHAR* pTilePath);
 
+	HRESULT		Ready_Adj();
+
 private:
 	vector<TILE*>		m_vecTile;
+
+	vector<list<TILE*>>	m_vecAdj;
 };
 	

@@ -11,6 +11,8 @@
 CTerrain::CTerrain()
 	: m_ToolView()
 	, m_MiniView()
+	, fWideValueX(0.0f)
+	, fWideValueY(0.0f)
 {
 	m_vecTile.reserve(TILEX * TILEY);
 }
@@ -65,6 +67,8 @@ void CTerrain::Check_Picking(CPoint _mousePosition, CTileTool* _CTileTool)
 	}
 }
 
+
+
 HRESULT CTerrain::Initialize()
 {
 	if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(
@@ -110,10 +114,15 @@ void CTerrain::Render(int _type)
 	for (auto pTile : m_vecTile)
 	{
 		D3DXMatrixIdentity(&matWorld);
-		D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
+		D3DXMatrixScaling(&matScale, (1.0f + (fWideValueX)), (1.0f + (fWideValueY)), 1.f);
 		D3DXMatrixTranslation(&matTrans,
-			pTile->vPos.x - m_ToolView->GetScrollPos(0),
-			pTile->vPos.y - m_ToolView->GetScrollPos(1), 0.f);
+
+
+			((pTile->vPos.x * fWideValueX + pTile->vPos.x)),
+			((pTile->vPos.y * fWideValueY + pTile->vPos.y)),
+			
+			0.f);
+
 
 		matWorld = matScale * matTrans;
 

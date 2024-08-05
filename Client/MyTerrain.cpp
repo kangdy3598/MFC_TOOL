@@ -2,6 +2,7 @@
 #include "MyTerrain.h"
 #include "Device.h"
 #include "TextureMgr.h"
+#include "TimeManager.h"
 
 
 CMyTerrain::CMyTerrain()
@@ -21,6 +22,11 @@ HRESULT CMyTerrain::Initialize(void)
 	{
 		return E_FAIL;
 	}
+
+	/*if (FAILED(Ready_Adj()))
+	{
+		return E_FAIL;
+	}*/
 
 	m_wstrObjKey = L"Terrain";
 	m_wstrStateKey = L"Tile";
@@ -123,6 +129,69 @@ HRESULT CMyTerrain::Load_Tile(const TCHAR * pTilePath)
 	}
 
 	CloseHandle(hFile);
+
+	return S_OK;
+}
+
+HRESULT CMyTerrain::Ready_Adj()
+{
+	m_vecAdj.resize(m_vecTile.size());
+
+	for (int i = 0; i < TILEY; ++i)
+	{
+		for (int j = 0; j < TILEX; ++j)
+		{
+			int iIndex = i * TILEX + j;
+
+			// ¸Ç À­ÁÙx && ¸Ç ¿ÞÂÊ ÁÙx
+			if ((0 != i) && (0 != iIndex % (TILEX * 2)))
+			{
+				// È¦->Â¦ 20°¨¼Ò, Â¦-> È¦ 21 °¨¼Ò
+
+				if ((0 != i % 2) && (!m_vecTile[iIndex - TILEX]->byOption))
+					m_vecAdj[iIndex].push_back(m_vecTile[iIndex - TILEX]);
+
+				else if ((0 == i % 2) && (!m_vecTile[iIndex - (TILEX + 1)]->byOption))
+					m_vecAdj[iIndex].push_back(m_vecTile[iIndex - (TILEX + 1)]);
+			}
+
+			// ¸Ç À­ÁÙx && ¸Ç ¿À¸¥ÂÊ ÁÙx
+			if ((0 != i) && ((TILEX * 2 - 1) != iIndex % (TILEX * 2)))
+			{
+				// È¦->Â¦ 19°¨¼Ò, Â¦-> È¦ 20 °¨¼Ò
+
+				if ((0 != i % 2) && (!m_vecTile[iIndex - (TILEX - 1)]->byOption))
+					m_vecAdj[iIndex].push_back(m_vecTile[iIndex - (TILEX - 1)]);
+
+				else if ((0 == i % 2) && (!m_vecTile[iIndex - TILEX]->byOption))
+					m_vecAdj[iIndex].push_back(m_vecTile[iIndex - TILEX]);
+			}
+
+			// ¸Ç ¾Æ·¡ÂÊ ÁÙx && ¸Ç ¿ÞÂÊ ÁÙx
+			if ((TILEY - 1 != i) && (0 != iIndex % (TILEX * 2)))
+			{
+				// È¦->Â¦ 20Áõ°¡, Â¦-> È¦ 19 Áõ°¡
+
+				if ((0 != i % 2) && (!m_vecTile[iIndex + TILEX]->byOption))
+					m_vecAdj[iIndex].push_back(m_vecTile[iIndex + TILEX]);
+
+				else if ((0 == i % 2) && (!m_vecTile[iIndex + (TILEX - 1)]->byOption))
+					m_vecAdj[iIndex].push_back(m_vecTile[iIndex + (TILEX - 1)]);
+			}
+
+			// ¸Ç ¾Æ·¡ÁÙx && ¸Ç ¿À¸¥ÂÊ ÁÙx
+			if ((TILEY - 1 != i) && ((TILEX * 2 - 1) != iIndex % (TILEX * 2)))
+			{
+				// È¦->Â¦ 21 Áõ°¡, Â¦-> È¦ 20 Áõ°¡
+
+				if ((0 != i % 2) && (!m_vecTile[iIndex + (TILEX + 1)]->byOption))
+					m_vecAdj[iIndex].push_back(m_vecTile[iIndex + (TILEX + 1)]);
+
+				else if ((0 == i % 2) && (!m_vecTile[iIndex + TILEX]->byOption))
+					m_vecAdj[iIndex].push_back(m_vecTile[iIndex + TILEX]);
+			}
+		}
+	}
 
 	return S_OK;
 }
