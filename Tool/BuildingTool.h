@@ -24,6 +24,7 @@ public:
 
 	CButton m_radioBuildingRace[3];
 	CButton m_checkAttackType[2];
+	CStatic m_picture;
 
 	CString m_strSearchName;
 	CEdit m_searchName;
@@ -31,6 +32,9 @@ public:
 	CListBox m_ListBox;
 	map<CString, BUILDINGDATA*>		m_mapBuildingData;
 	BUILDINGDATA* m_tSelectBuildingData;
+
+	CString m_strFullPath;
+	CString m_strNameKey;
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
 
@@ -43,9 +47,10 @@ public:
 	afx_msg void OnBnClickedSearch();
 	afx_msg void OnBnClickedShowAll();
 	afx_msg void OnLbnSelchange();
+	afx_msg void OnBnClickedChangeImage();
 
 public:
 	void OnDataLoad();
-	afx_msg void OnBnClickedChangeImage();
-	CStatic m_picture;
+	
+	
 };

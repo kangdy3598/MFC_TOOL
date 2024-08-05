@@ -11,7 +11,9 @@
 
 IMPLEMENT_DYNCREATE(CMiniView, CView)
 
-CMiniView::CMiniView() : m_pTerrain()
+CMiniView::CMiniView() 
+	: m_pTerrain()
+	, m_pBuilding()
 {
 }
 
@@ -32,6 +34,7 @@ void CMiniView::OnDraw(CDC* /*pDC*/)
 	CDevice::Get_Instance()->Render_Begin();
 
 	m_pTerrain->MiniRender();
+	m_pBuilding->MiniRender();
 
 	CDevice::Get_Instance()->Render_End(m_hWnd);
 
@@ -69,5 +72,6 @@ void CMiniView::OnInitialUpdate()
 
 	pToolView->Set_MiniView(this);
 	m_pTerrain = pToolView->m_pTerrain;
+	m_pBuilding = pToolView->m_pBuilding;
 	
 }

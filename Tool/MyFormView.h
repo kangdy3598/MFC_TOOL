@@ -3,10 +3,13 @@
 
 
 // CMyFormView 폼 보기
+
 #include "UnitTool.h"
 #include "TileTool.h"
 #include "BuildingTool.h"
 
+class CMainFrame;
+class CToolView;
 class CMyFormView : public CFormView
 {
 	DECLARE_DYNCREATE(CMyFormView)
@@ -43,19 +46,17 @@ public:
 
 	void SetTreeListOnProtoss();
 	void SetTreeListOnEtc();
-	void Render();
+	void Render(CPoint pt);
 
-
+	void Set_ToolView();
 
 public:
 	CUnitTool m_UnitTool;
 	CTileTool m_TileTool;
 	CBuildingTool m_BuildingTool;
+	CToolView* m_pToolView;
 
 	CTreeCtrl m_tree;
-
-	bool m_bValue;
-
 
 	int iTreeIndex;
 

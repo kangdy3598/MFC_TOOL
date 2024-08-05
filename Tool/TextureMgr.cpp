@@ -70,6 +70,9 @@ HRESULT CTextureMgr::Insert_Texture(const TCHAR * pFilePath,
 		m_mapTex.insert({ pObjKey,pTexture });
 	}
 
+	else if (eType == TEX_MULTI)
+		iter->second->Insert_Texture(pFilePath, pStateKey, iCnt);
+
 	return S_OK;
 }
 

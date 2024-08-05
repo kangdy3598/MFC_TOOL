@@ -14,8 +14,8 @@ IMPLEMENT_DYNCREATE(CMyFormView, CFormView)
 
 CMyFormView::CMyFormView()
 	: CFormView(IDD_MyFormView)
-	, m_bValue(false)
     , iTreeIndex(0)
+    , m_pToolView(nullptr)
 {
 
 }
@@ -61,6 +61,20 @@ void CMyFormView::Dump(CDumpContext& dc) const
 // CMyFormView 메시지 처리기
 
 
+void CMyFormView::Render(CPoint pt)
+{
+
+}
+
+void CMyFormView::Set_ToolView()
+{
+    CMainFrame* pMainFrm = (CMainFrame*)AfxGetMainWnd();
+    m_pToolView = pMainFrm->GetToolView();
+
+    m_pToolView->Set_MyView(this);
+}
+
+
 void CMyFormView::OnInitialUpdate()
 {
     CFormView::OnInitialUpdate();
@@ -69,11 +83,10 @@ void CMyFormView::OnInitialUpdate()
     CFont		m_Font;
     m_Font.CreatePointFont(180, L"궁서");
 
-    iTreeIndex = 1;
-    CMainFrame* pMainFrm = (CMainFrame*)AfxGetMainWnd();
-    CToolView* pToolView = pMainFrm->GetToolView();
-    pToolView->Set_MyView(this);
+    Set_ToolView();
     
+    iTreeIndex = 1;
+   
     root = m_tree.InsertItem((L"프로토스"), 0, 0, TVI_ROOT, TVI_LAST);
     unit = m_tree.InsertItem((L"유닛"), 0, 0, root, TVI_LAST);
     building = m_tree.InsertItem((L"건물"), 0, 0, root, TVI_LAST);
@@ -88,7 +101,7 @@ void CMyFormView::OnBnClickedUnit()
         m_UnitTool.Create(IDD_UnitTool);
 
     m_UnitTool.ShowWindow(SW_SHOW);
-
+    m_pToolView->SetMouseState(MouseState::MS_UNIT);
 
     //HTREEITEM root = m_tree.InsertItem((L"프로토스"), 0, 0, TVI_ROOT, TVI_LAST);
     //HTREEITEM unit = m_tree.InsertItem((L"유닛"), 0, 0, root, TVI_LAST);
@@ -108,7 +121,7 @@ void CMyFormView::OnBnClickedTile()
         m_TileTool.Create(IDD_TileTool);
 
     m_TileTool.ShowWindow(SW_SHOW);
-
+    m_pToolView->SetMouseState(MouseState::MS_TILE);
 }
 
 void CMyFormView::OnBnClickedBuilding()
@@ -118,6 +131,7 @@ void CMyFormView::OnBnClickedBuilding()
         m_BuildingTool.Create(IDD_BuildingTool);
 
     m_BuildingTool.ShowWindow(SW_SHOW);
+  //  m_pToolView->SetMouseState(MouseState::MS_BUILDING);
 }
 
 void CMyFormView::OnBnClickedSave()
@@ -189,71 +203,28 @@ void CMyFormView::SetTreeListOnEtc()
     m_tree.InsertItem((L"3번타일"), 0, 0, tile, TVI_LAST);
 }
 
-void CMyFormView::Render()
-{
-	if (!m_bValue)
-		return;
-	D3DXMATRIX		matWorld, matScale, matTrans;
-
-	TCHAR	szBuf[MIN_STR] = L"";
-
-	//for (auto pTile : m_vecTile)
-	{
-		D3DXMatrixIdentity(&matWorld);
-		D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
-		D3DXMatrixTranslation(&matTrans,
-			300,
-			300, 0.f);
-
-		matWorld = matScale * matTrans;
-
-		RECT	rc{};
-
-		// GetClientRect : 클라이언트 영역에 해당하는 RECT 정보를 얻어오는 함수
-		//GetClientRect(m_ToolView->m_hWnd, &rc);
-
-		float	fRatioX = WINCX / float(rc.right - rc.left);
-		float	fRatioY = WINCY / float(rc.bottom - rc.top);
-
-		//Set_Ratio(&matWorld, fRatioX, fRatioY);
-
-		CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matWorld);
-
-		const TEXINFO* pTexInfo =
-			CTextureMgr::Get_Instance()->Get_Texture(L"Building", L"Building");
-
-		float	fCenterX = pTexInfo->tImgInfo.Width / 2.f;
-		float	fCenterY = pTexInfo->tImgInfo.Height / 2.f;
-
-		HRESULT result = CDevice::Get_Instance()->Get_Sprite()->Draw(
-			pTexInfo->pTexture,
-			nullptr,
-			&D3DXVECTOR3(fCenterX, fCenterY, 0.f), 
-			nullptr,
-			D3DCOLOR_ARGB(255, 255, 255, 255));
-
-	}
-
-
-}
-
 void CMyFormView::OnTvnSelchangedTree(NMHDR* pNMHDR, LRESULT* pResult)
 {
 	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	*pResult = 0;
 
-
-
 	HTREEITEM hSelected = m_tree.GetSelectedItem();
 	CString SelectedName = m_tree.GetItemText(hSelected);
-	if (!lstrcmp(SelectedName, L"게이트웨이"))
+	if (!lstrcmp(SelectedName, L"그 외"))
 	{
-		m_bValue = true;
-		CMainFrame* pMainFrm = (CMainFrame*)AfxGetMainWnd();
-		CToolView* pToolView = pMainFrm->GetToolView();
-		pToolView->OnDraw(nullptr);
+        m_pToolView->SetMouseState(MouseState::MS_BUILDING);
+        m_pToolView->m_pBuilding->SetNowBuildingName(L"Gateway");
 	}
+    else if (!lstrcmp(SelectedName, L"프로토스"))
+    {
+        m_pToolView->SetMouseState(MouseState::MS_BUILDING);
+        m_pToolView->m_pBuilding->SetNowBuildingName(L"Forge");
+    }
+    else
+    {
+        m_pToolView->SetMouseState(MouseState::MS_NONE);
+    }
 }
 
 void CMyFormView::OnTvnItemChangedTree(NMHDR* pNMHDR, LRESULT* pResult)

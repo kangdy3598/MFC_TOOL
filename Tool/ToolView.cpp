@@ -32,11 +32,15 @@ BEGIN_MESSAGE_MAP(CToolView, CScrollView)
 
 	ON_WM_DESTROY()
 	ON_WM_LBUTTONDOWN()
+	ON_WM_MOUSEMOVE()
+	ON_WM_KEYDOWN()
 END_MESSAGE_MAP()
 
 // CToolView 생성/소멸
 
-CToolView::CToolView() : m_pTerrain(nullptr)
+CToolView::CToolView() 
+	: m_pTerrain(nullptr)
+	, eMouseState(MouseState::MS_NONE)
 {
 	// TODO: 여기에 생성 코드를 추가합니다.
 
@@ -139,25 +143,12 @@ void CToolView::OnDraw(CDC* /*pDC*/)
 	m_pUnit->Render();
 	m_pBuilding->Render();
 
-	//m_pMiniView->OnDraw(nullptr);
-	/*TCHAR	szBuf[MIN_STR] = L"";
-
-	CDevice::Get_Instance()->Get_Font()->DrawTextW(
-		CDevice::Get_Instance()->Get_Sprite(),
-		szBuf, lstrlen(szBuf), nullptr, 0, D3DCOLOR_ARGB(255, 255, 255, 255));
-
-	swprintf_s(szBuf, L"X : %f, Y : %f", Get_Mouse().x,
-		Get_Mouse().y + GetScrollPosition().y);
-
-	D3DXMATRIX	matTrans2;
-	D3DXMatrixTranslation(&matTrans2, 100.f, 100.f, 0.f);
-	CDevice::Get_Instance()->Get_Sprite()->SetTransform(&matTrans2);
-	CDevice::Get_Instance()->Get_Font()->DrawTextW(
-		CDevice::Get_Instance()->Get_Sprite(),
-		szBuf, lstrlen(szBuf), nullptr, 0, D3DCOLOR_ARGB(255, 255, 255, 255));*/
+	if (eMouseState == MouseState::MS_BUILDING)
+		m_pBuilding->PreviewRender();
 
 	CDevice::Get_Instance()->Render_End();	
 }
+
 void CToolView::OnDestroy()
 {
 	CScrollView::OnDestroy();
@@ -171,30 +162,41 @@ void CToolView::OnDestroy()
 void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	CScrollView::OnLButtonDown(nFlags, point);
-	////
+
+	if (eMouseState == MouseState::MS_NONE)
+		return;
+
+	if (eMouseState == MouseState::MS_BUILDING)
+	{
+		m_pBuilding->InstallBuilding();
+		m_pMiniView->OnDraw(nullptr);
+		Invalidate(FALSE);
+		return;
+	}
 	CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
 	CMyFormView* pMyForm = dynamic_cast<CMyFormView*>(
 		pMainFrm->m_SecondSplitter.GetPane(1, 0));
 
 	CTileTool* pTileTool = &pMyForm->m_TileTool;
 
-
-
-
-
 	m_pTerrain->Check_Picking(point + GetScrollPosition(), pTileTool);
 	m_pMiniView->OnDraw(nullptr);
 	
-
 	Invalidate();
 }
 
 void CToolView::OnMouseMove(UINT nFlags, CPoint point)
 {
-	CScrollView::OnMouseMove(nFlags, point);
-	AfxMessageBox(L"mouse move");
-}
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 
+	//if (eMouseState == MouseState::MS_NONE)
+	//	return;
+
+	CScrollView::OnMouseMove(nFlags, point);
+
+	
+	Invalidate(FALSE);
+}
 
 #pragma region 생략
 BOOL CToolView::PreCreateWindow(CREATESTRUCT& cs)
@@ -248,7 +250,18 @@ CToolDoc* CToolView::GetDocument() const // 디버그되지 않은 버전은 인라인으로 지
 #pragma endregion 생략
 
 
+void CToolView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+
+	CScrollView::OnKeyDown(nChar, nRepCnt, nFlags);
+
+	switch (nChar)
+	{
+	case VK_ESCAPE:
+		eMouseState = MouseState::MS_NONE;
+		break;
+	}
 
 
-
-
+}
