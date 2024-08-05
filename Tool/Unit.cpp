@@ -47,7 +47,7 @@ void CUnit::Render()
 	D3DXMATRIX		matWorld, matScale, matTrans;
 
 	TCHAR	szBuf[MIN_STR] = L"";
-
+	return;
 	//for (auto pTile : m_vecTile)
 	{
 		D3DXMatrixIdentity(&matWorld);

@@ -50,12 +50,8 @@ public:
 	void SetTreeListOnEtc();
 	void Render(CPoint pt);
 
-<<<<<<< HEAD
 	void Set_ToolView();
 
-=======
-	CTreeCtrl& Get_TreeCtrl() { return m_tree; }
->>>>>>> origin/main
 public:
 	CUnitTool m_UnitTool;
 	CTileTool m_TileTool;

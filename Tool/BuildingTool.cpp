@@ -399,19 +399,12 @@ void CBuildingTool::OnBnClickedChangeImage()
 		
 		m_picture.SetBitmap((HBITMAP)*pImage);
 
-<<<<<<< HEAD
 		m_tSelectBuildingData->strImgPath = str; // "C:\\ ~~~ Gateway\\0.png"
 
 		//str.TrimLeft(szPath);
 		str.Replace(szPath, L"");	// "Gateway\\0.png"	
 		str.Replace(L"\\" + Dlg.GetFileName(), L""); // Gateway
 		m_tSelectBuildingData->strKeyName = str;
-
-		
-=======
-		//m_tSelectBuildingData->strImgPath = str;
-
->>>>>>> origin/main
 	}
 
 	UpdateData(FALSE);
