@@ -61,13 +61,12 @@ protected:
 public:
 	void Set_MiniView(CMiniView* _pMiniView) { m_pMiniView = _pMiniView; }
 	void Set_MyView(CMyFormView* _pMyView) { m_pMyFormView = _pMyView; }
-<<<<<<< HEAD
 
 	CMyFormView* Get_MyView() { return m_pMyFormView; }
-=======
+
 	MouseState GetMouseState() { return eMouseState; }
 	void SetMouseState(MouseState _mouseState) { eMouseState = _mouseState; }
->>>>>>> origin/main
+
 public:
 	CTerrain* m_pTerrain;
 	CUnit* m_pUnit;

@@ -50,12 +50,9 @@ public:
 	void SetTreeListOnEtc();
 	void Render(CPoint pt);
 
-<<<<<<< HEAD
-	void Show_TreeUnitList();
 
-=======
+	void Show_TreeUnitList();
 	void Set_ToolView();
->>>>>>> origin/main
 
 public:
 	CUnitTool m_UnitTool;
