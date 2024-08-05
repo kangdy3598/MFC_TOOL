@@ -88,9 +88,6 @@ void CUnitTool::OnBnClickedCreate()
     // TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
     UpdateData(TRUE);
 
-
-
-
     UNITDATA* pUnit = new UNITDATA;
 
     pUnit->strName = m_strName;
@@ -102,7 +99,7 @@ void CUnitTool::OnBnClickedCreate()
     {
         if (m_radioUnitType[i].GetCheck())
         {
-            pUnit->byUnitType = i;
+            pUnit->byUnitRace = i;
             break;
         }
     }
@@ -162,13 +159,9 @@ void CUnitTool::OnBnClickedCreate()
 
             m_MapPngUnitImg.insert({ m_strName, pImage });
             //m_Picture.SetBitmap((HBITMAP)*pImage);
-
-            //
-
-            //CTextureMgr::Get_Instance()->Insert_Texture(str, TEX_MULTI, L"Unit", m_strNameKey.GetString(), 10);
-            CTextureMgr::Get_Instance()->Insert_Texture(str, TEX_MULTI, L"Unit", L"Dragoon", 12);
-            //CTextureMgr::Get_Instance()->Insert_Texture(str, TEX_MULTI, L"Unit", m_wstrStateKey.c_str(), 12);
-
+            CTextureMgr::Get_Instance()->Insert_Texture(str, TEX_MULTI,
+                L"Unit", pUnit->strName, 1);
+            
         }
     }
 
@@ -278,7 +271,7 @@ void CUnitTool::OnBnClickedSave()
             WriteFile(hFile, rPair.second->strName.GetString(), dwStringSize, &dwByte, nullptr);
             WriteFile(hFile, &rPair.second->iHP, sizeof(int), &dwByte, nullptr);
             WriteFile(hFile, &rPair.second->iAttack, sizeof(int), &dwByte, nullptr);
-            WriteFile(hFile, &rPair.second->byUnitType, sizeof(BYTE), &dwByte, nullptr);
+            WriteFile(hFile, &rPair.second->byUnitRace, sizeof(BYTE), &dwByte, nullptr);
             WriteFile(hFile, &rPair.second->byAttackType, sizeof(BYTE), &dwByte, nullptr);
         }
         CloseHandle(hFile);
@@ -338,7 +331,7 @@ void CUnitTool::OnBnClickedLoad()
 
             ReadFile(hFile, &(tData.iHP), sizeof(int), &dwByte, nullptr);
             ReadFile(hFile, &(tData.iAttack), sizeof(int), &dwByte, nullptr);
-            ReadFile(hFile, &(tData.byUnitType), sizeof(BYTE), &dwByte, nullptr);
+            ReadFile(hFile, &(tData.byUnitRace), sizeof(BYTE), &dwByte, nullptr);
             ReadFile(hFile, &(tData.byAttackType), sizeof(BYTE), &dwByte, nullptr);
 
             if (0 == dwByte)
@@ -354,7 +347,7 @@ void CUnitTool::OnBnClickedLoad()
 
             pUnit->iHP = tData.iHP;
             pUnit->iAttack = tData.iAttack;
-            pUnit->byUnitType = tData.byUnitType;
+            pUnit->byUnitRace = tData.byUnitRace;
             pUnit->byAttackType = tData.byAttackType;
 
             m_mapUnitData.insert({ pUnit->strName, pUnit });
@@ -405,7 +398,7 @@ void CUnitTool::OnListBoxSelChange()
         m_checkAttackType[1].SetCheck(TRUE);
 
 
-    m_radioUnitType[iter->second->byUnitType].SetCheck(TRUE);
+    //m_radioUnitType[iter->second->byUnitType].SetCheck(TRUE);
 
     //----------------------------------------------------------------
 
@@ -433,7 +426,11 @@ void CUnitTool::OnBnClickedOk()
 
     CMainFrame* pMainFrm = (CMainFrame*)AfxGetMainWnd();
     CToolView* pToolView = pMainFrm->GetToolView();
+    HTREEITEM unit = pToolView->Get_MyView()->unit;
 
-    pToolView->Get_MyView()->Show_TreeUnitList();
+    for (auto iter : m_mapUnitData)
+    {
+        pToolView->Get_MyView()->m_tree.InsertItem(iter.first, 0, 0, unit, TVI_LAST);
+    }
 }
 

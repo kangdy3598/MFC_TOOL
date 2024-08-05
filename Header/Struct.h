@@ -75,21 +75,41 @@ public:
 
 typedef	struct tagUnitData
 {
+//#ifndef _AFX
+//	wstring	strName;
+//	wstring	strPathName;
+//	
+//#else
+//	CString	strName;
+//	CString	strPathName;
+//	
+//#endif
+//
+//
+//	int		iHP;
+//	int		iAttack;
+//
+//	BYTE	byUnitType;		// byJobIndex;
+//	BYTE	byAttackType;	// byItem;
+
 #ifndef _AFX
 	wstring	strName;
-	wstring	strPathName;
-	
+	wstring strImgPath;
+	wString strKeyName;
 #else
 	CString	strName;
-	CString	strPathName;
-	
+	CString strImgPath;
+	CString strKeyName;
 #endif
 
+	D3DXVECTOR3	vPos;			// 중점 좌표
+	D3DXVECTOR2 vSize;			// 가로, 세로 사이즈
 
 	int		iHP;
+	int		iShield;
 	int		iAttack;
 
-	BYTE	byUnitType;		// byJobIndex;
+	BYTE	byUnitRace;		// byJobIndex;
 	BYTE	byAttackType;	// byItem;
 
 }UNITDATA;

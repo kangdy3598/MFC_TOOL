@@ -22,17 +22,23 @@ public:
 	}
 
 
-	vector<TILE*>& Get_VecTile() { return m_vecTile; }
+	vector<UNITDATA*>& Get_VecUnit() { return m_vecUnit; }
 
 public:
 	HRESULT		Initialize();
 	void		Update();
 	void		Render();
 	void		MiniRender();
+	void		PreviewRender();
+	void		InstallUnit();
 	void		Release();
 
 	void		MouseMove();
 
+	void SetNowUnitName(CString _unitName)
+	{
+		m_strNowUnitName = _unitName;
+	}
 
 	D3DXVECTOR3 Get_Pos() { return vPos; }
 	void Set_Pos(CPoint _Pos) { vPos.x = float(_Pos.x); vPos.y = float(_Pos.y); }
@@ -43,10 +49,10 @@ public:
 
 
 private:
-	vector<TILE*>		m_vecTile;
+	vector<UNITDATA*>		m_vecUnit;
 	CToolView* m_ToolView;
 	CMiniView* m_MiniView;
-
+	CString m_strNowUnitName;
 
 
 

@@ -106,9 +106,6 @@ void CMyFormView::OnBnClickedUnit()
         m_UnitTool.Create(IDD_UnitTool);
 
     m_UnitTool.ShowWindow(SW_SHOW);
-
-    m_pToolView->SetMouseState(MouseState::MS_UNIT);
-
 }
 
 void CMyFormView::OnBnClickedTile()
@@ -119,8 +116,6 @@ void CMyFormView::OnBnClickedTile()
         m_TileTool.Create(IDD_TileTool);
 
     m_TileTool.ShowWindow(SW_SHOW);
-    m_pToolView->SetMouseState(MouseState::MS_TILE);
-
 }
 
 void CMyFormView::OnBnClickedBuilding()
@@ -130,7 +125,6 @@ void CMyFormView::OnBnClickedBuilding()
         m_BuildingTool.Create(IDD_BuildingTool);
 
     m_BuildingTool.ShowWindow(SW_SHOW);
-    //  m_pToolView->SetMouseState(MouseState::MS_BUILDING);
 }
 
 void CMyFormView::OnBnClickedPathFind()
@@ -238,29 +232,29 @@ void CMyFormView::OnTvnSelchangedTree(NMHDR* pNMHDR, LRESULT* pResult)
     // TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
     *pResult = 0;
 
-    //<<<<<<< HEAD
-    //    HTREEITEM hSelected = m_tree.GetSelectedItem();
-    //    CString SelectedName = m_tree.GetItemText(hSelected);
-    //
-    //    if (!lstrcmp(SelectedName, m_UnitTool.Get_Name()))
-    //=======
     HTREEITEM hSelected = m_tree.GetSelectedItem();
-    CString SelectedName = m_tree.GetItemText(hSelected);
-    if (!lstrcmp(SelectedName, L"그 외"))
-    {
-        m_pToolView->SetMouseState(MouseState::MS_BUILDING);
-        m_pToolView->m_pBuilding->SetNowBuildingName(L"Gateway");
-    }
-    else if (!lstrcmp(SelectedName, L"프로토스"))
+    HTREEITEM hParent = m_tree.GetParentItem(hSelected);
 
+    CString ParentName = m_tree.GetItemText(hParent);
+    CString SelectName = m_tree.GetItemText(hSelected);
+    if (!lstrcmp(ParentName, L"유닛"))
+    {
+        m_pToolView->SetMouseState(MouseState::MS_UNIT);
+        m_pToolView->m_pUnit->SetNowUnitName(SelectName);
+        
+    }
+    else if (!lstrcmp(ParentName, L"건물"))
     {
         m_pToolView->SetMouseState(MouseState::MS_BUILDING);
-        m_pToolView->m_pBuilding->SetNowBuildingName(L"Forge");
+        
+        m_pToolView->m_pBuilding->SetNowBuildingName(SelectName);
     }
     else
     {
         m_pToolView->SetMouseState(MouseState::MS_NONE);
     }
+
+    Invalidate(false);
 }
 
 void CMyFormView::OnTvnItemChangedTree(NMHDR* pNMHDR, LRESULT* pResult)
