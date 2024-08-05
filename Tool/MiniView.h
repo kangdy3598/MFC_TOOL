@@ -5,6 +5,7 @@
 #include "Device.h"
 #include "TextureMgr.h"
 #include "Terrain.h"
+#include "Building.h"
 
 class CMiniView : public CView
 {
@@ -30,6 +31,7 @@ public:
 
 private:
 	CTerrain* m_pTerrain;
+	CBuilding* m_pBuilding;
 };
 
 

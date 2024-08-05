@@ -7,6 +7,7 @@
 #include "BuildingTool.h"
 #include "Device.h"
 #include "FilePath.h"
+#include "TextureMgr.h"
 
 // CBuilding 대화 상자
 
@@ -108,7 +109,6 @@ void CBuildingTool::OnBnClickedCreate()
 	UpdateData(FALSE);
 }
 
-
 void CBuildingTool::OnBnClickedDelete()
 {
 	UpdateData(TRUE);
@@ -131,7 +131,6 @@ void CBuildingTool::OnBnClickedDelete()
 
 	UpdateData(FALSE);
 }
-
 
 void CBuildingTool::OnBnClickedSave()
 {
@@ -165,8 +164,8 @@ void CBuildingTool::OnBnClickedSave()
 		{
 			dwStringSize = sizeof(wchar_t) * (rPair.second->strName.GetLength() + 1);
 			WriteFile(hFile, &dwStringSize, sizeof(DWORD), &dwByte, nullptr);
-			
 			WriteFile(hFile, rPair.second->strName.GetString(), dwStringSize, &dwByte, nullptr);
+			
 			WriteFile(hFile, &rPair.second->iHP, sizeof(int), &dwByte, nullptr);
 			WriteFile(hFile, &rPair.second->iAttack, sizeof(int), &dwByte, nullptr);
 			WriteFile(hFile, &rPair.second->iShield, sizeof(int), &dwByte, nullptr);
@@ -177,11 +176,15 @@ void CBuildingTool::OnBnClickedSave()
 			dwStringSize = sizeof(wchar_t) * (rPair.second->strImgPath.GetLength() + 1);
 			WriteFile(hFile, &dwStringSize, sizeof(DWORD), &dwByte, nullptr);
 			WriteFile(hFile, rPair.second->strImgPath.GetString(), dwStringSize, &dwByte, nullptr);
+
+			dwStringSize = sizeof(wchar_t) * (rPair.second->strKeyName.GetLength() + 1);
+			WriteFile(hFile, &dwStringSize, sizeof(DWORD), &dwByte, nullptr);
+			WriteFile(hFile, rPair.second->strKeyName.GetString(), dwStringSize, &dwByte, nullptr);
+
 		}
 		CloseHandle(hFile);
 	}
 }
-
 
 void CBuildingTool::OnBnClickedSearch()
 {
@@ -201,7 +204,6 @@ void CBuildingTool::OnBnClickedSearch()
 	UpdateData(FALSE);
 }
 
-
 void CBuildingTool::OnBnClickedShowAll()
 {
 	m_ListBox.ResetContent();
@@ -210,7 +212,6 @@ void CBuildingTool::OnBnClickedShowAll()
 		m_ListBox.AddString(iter.first);
 	}
 }
-
 
 void CBuildingTool::OnLbnSelchange()
 {
@@ -304,10 +305,11 @@ void CBuildingTool::OnDataLoad()
 		while (true)
 		{
 			ReadFile(hFile, &dwStrByte, sizeof(DWORD), &dwByte, nullptr);
-
 			TCHAR* pName = new TCHAR[dwStrByte / 2];
 			ReadFile(hFile, pName, dwStrByte, &dwByte, nullptr);
+			if (0 == dwByte){ delete[]pName; break; }
 
+			//////////////////////////////////////////////////////////////////
 			ReadFile(hFile, &(tData.iHP), sizeof(int), &dwByte, nullptr);
 			ReadFile(hFile, &(tData.iAttack), sizeof(int), &dwByte, nullptr);
 			ReadFile(hFile, &(tData.iShield), sizeof(int), &dwByte, nullptr);
@@ -315,32 +317,46 @@ void CBuildingTool::OnDataLoad()
 			ReadFile(hFile, &(tData.byBuildRace), sizeof(BYTE), &dwByte, nullptr);
 			ReadFile(hFile, &(tData.byAttackType), sizeof(BYTE), &dwByte, nullptr);
 
+			//////////////////////////////////////////////////////////////////
 			ReadFile(hFile, &dwStrByte, sizeof(DWORD), &dwByte, nullptr);
-
 			TCHAR* pPath = new TCHAR[dwStrByte / 2];
 			ReadFile(hFile, pPath, dwStrByte, &dwByte, nullptr);
+			if (0 == dwByte){ delete[]pPath; break; }
 
-			if (0 == dwByte)
-			{
-				delete[]pName;
-				break;
-			}
+			//////////////////////////////////////////////////////////////////
+			ReadFile(hFile, &dwStrByte, sizeof(DWORD), &dwByte, nullptr);
+			TCHAR* pKey = new TCHAR[dwStrByte / 2];
+			ReadFile(hFile, pKey, dwStrByte, &dwByte, nullptr);
+			if (0 == dwByte) { delete[]pKey; break; }
 
-			BUILDINGDATA* pUnit = new BUILDINGDATA;
+			BUILDINGDATA* pBuilding = new BUILDINGDATA;
 
-			pUnit->strName = pName;
+			pBuilding->strName = pName;
 			delete[]pName;
 
-			pUnit->iHP = tData.iHP;
-			pUnit->iAttack = tData.iAttack;
-			pUnit->iShield = tData.iShield;
-			pUnit->byBuildRace = tData.byBuildRace;
-			pUnit->byAttackType = tData.byAttackType;
-			pUnit->strImgPath = tData.strImgPath;
+			pBuilding->strImgPath = pPath;
+			delete[]pPath;
 
-			m_mapBuildingData.insert({ pUnit->strName, pUnit });
+			pBuilding->strKeyName = pKey;
+			delete[]pKey;
 
-			m_ListBox.AddString(pUnit->strName);
+			pBuilding->iHP = tData.iHP;
+			pBuilding->iAttack = tData.iAttack;
+			pBuilding->iShield = tData.iShield;
+			pBuilding->byBuildRace = tData.byBuildRace;
+			pBuilding->byAttackType = tData.byAttackType;
+			
+			m_mapBuildingData.insert({ pBuilding->strName, pBuilding });
+
+			m_ListBox.AddString(pBuilding->strName);
+
+			if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(
+				pBuilding->strImgPath, TEX_MULTI, L"Building",
+				pBuilding->strKeyName, MAX_TILETYPE)))
+			{
+				AfxMessageBox(L"Building Texture Failed");
+				return;
+			}
 		}
 
 		CloseHandle(hFile);
@@ -348,7 +364,6 @@ void CBuildingTool::OnDataLoad()
 
 	UpdateData(FALSE);
 }
-
 
 void CBuildingTool::OnBnClickedChangeImage()
 {
@@ -384,8 +399,12 @@ void CBuildingTool::OnBnClickedChangeImage()
 		
 		m_picture.SetBitmap((HBITMAP)*pImage);
 
-		//m_tSelectBuildingData->strImgPath = str;
+		m_tSelectBuildingData->strImgPath = str; // "C:\\ ~~~ Gateway\\0.png"
 
+		//str.TrimLeft(szPath);
+		str.Replace(szPath, L"");	// "Gateway\\0.png"	
+		str.Replace(L"\\" + Dlg.GetFileName(), L""); // Gateway
+		m_tSelectBuildingData->strKeyName = str;
 	}
 
 	UpdateData(FALSE);

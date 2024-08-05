@@ -78,9 +78,11 @@ typedef	struct tagUnitData
 #ifndef _AFX
 	wstring	strName;
 	wstring	strPathName;
+	
 #else
 	CString	strName;
 	CString	strPathName;
+	
 #endif
 
 
@@ -97,18 +99,22 @@ typedef	struct tagBuildingData
 #ifndef _AFX
 	wstring	strName;
 	wstring strImgPath;
+	wString strKeyName;
 #else
 	CString	strName;
 	CString strImgPath;
+	CString strKeyName;
 #endif
+
+	D3DXVECTOR3	vPos;			// 중점 좌표
+	D3DXVECTOR2 vSize;			// 가로, 세로 사이즈
+
 	int		iHP;
 	int		iShield;
 	int		iAttack;
 
 	BYTE	byBuildRace;		// byJobIndex;
 	BYTE	byAttackType;	// byItem;
-
-
 
 }BUILDINGDATA;
 

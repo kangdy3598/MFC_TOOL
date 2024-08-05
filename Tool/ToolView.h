@@ -14,6 +14,13 @@
 #include "MiniView.h"
 #include "MyFormView.h"
 
+enum class MouseState
+{
+	MS_NONE,
+	MS_TILE,
+	MS_UNIT,
+	MS_BUILDING,
+};
 class CToolDoc; // CScrollView로 상속받으면 가끔 멤버 함수 안 되는 오류가 있어서 해결하는 방법
 class CToolView : public CScrollView
 {
@@ -54,11 +61,16 @@ protected:
 public:
 	void Set_MiniView(CMiniView* _pMiniView) { m_pMiniView = _pMiniView; }
 	void Set_MyView(CMyFormView* _pMyView) { m_pMyFormView = _pMyView; }
+<<<<<<< HEAD
 
 	CMyFormView* Get_MyView() { return m_pMyFormView; }
+=======
+	MouseState GetMouseState() { return eMouseState; }
+	void SetMouseState(MouseState _mouseState) { eMouseState = _mouseState; }
+>>>>>>> origin/main
 public:
 	CTerrain* m_pTerrain;
-	//CUnit* m_pUnit;
+	CUnit* m_pUnit;
 
 	list<CUnit*>	m_listUnit;
 	//list<CUnit*>::iterator m_iterListUnit;
@@ -68,13 +80,16 @@ public:
 
 	CMiniView* m_pMiniView;
 	CMyFormView* m_pMyFormView;
+	
 
+public:
+	MouseState eMouseState;
 public:
 	virtual void OnInitialUpdate();
 	afx_msg void OnDestroy();
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
-
+	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
 };
 
 #ifndef _DEBUG  // ToolView.cpp의 디버그 버전
