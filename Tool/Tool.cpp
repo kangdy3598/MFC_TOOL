@@ -10,6 +10,7 @@
 
 #include "ToolDoc.h"
 #include "ToolView.h"
+#include "TileCreate.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -19,7 +20,7 @@
 // CToolApp
 
 BEGIN_MESSAGE_MAP(CToolApp, CWinAppEx)
-	ON_COMMAND(ID_APP_ABOUT, &CToolApp::OnAppAbout)
+	ON_COMMAND(ID_APP_ABOUT, &CToolApp::test)
 	// 표준 파일을 기초로 하는 문서 명령입니다.
 	ON_COMMAND(ID_FILE_NEW, &CWinAppEx::OnFileNew)
 	ON_COMMAND(ID_FILE_OPEN, &CWinAppEx::OnFileOpen)
@@ -178,8 +179,8 @@ void CToolApp::OnAppAbout()
 
 void CToolApp::test()
 {
-	CAboutDlg aboutDlg;
-	aboutDlg.DoModal();
+	CTileCreate tileCreateDlg;
+	tileCreateDlg.DoModal();
 }
 
 // CToolApp 메시지 처리기

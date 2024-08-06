@@ -64,6 +64,9 @@
     <ClCompile Include="PathFind.cpp">
       <Filter>05. Etc\01. Dialog\03.PathFind</Filter>
     </ClCompile>
+    <ClCompile Include="TileCreate.cpp">
+      <Filter>05. Etc\01. Dialog\04. TileCreateTool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tool.h">
@@ -134,6 +137,9 @@
     </ClInclude>
     <ClInclude Include="PathFind.h">
       <Filter>05. Etc\01. Dialog\03.PathFind</Filter>
+    </ClInclude>
+    <ClInclude Include="TileCreate.h">
+      <Filter>05. Etc\01. Dialog\04. TileCreateTool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -222,6 +228,9 @@
     </Filter>
     <Filter Include="05. Etc\01. Dialog\03.PathFind">
       <UniqueIdentifier>{d3801505-6ff1-43d4-8100-a1d8a83ff0a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Etc\01. Dialog\04. TileCreateTool">
+      <UniqueIdentifier>{588dac3f-7e8d-40c6-bd57-5d80597da0c1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -59,7 +59,10 @@ void CUnit::Render()
 
 		const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(
 			L"Unit", pTile->strKeyName, 0);
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main
 		//const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(m_wstrObjKey.c_str(), m_wstrStateKey.c_str(), 0);
 
 		float	fCenterX = pTexInfo->tImgInfo.Width / 2.f;

@@ -307,6 +307,19 @@ BEGIN
     PUSHBUTTON      "불러오기",IDC_BUTTON2,88,129,57,19
 END
 
+IDD_TileCreate DIALOGEX 0, 0, 77, 127
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "대화 상자"
+FONT 9, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "확인",IDOK,7,106,63,14
+    EDITTEXT        IDC_EDIT1,30,70,31,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT2,30,39,30,14,ES_AUTOHSCROLL
+    LTEXT           "X",IDC_STATIC,20,42,8,8
+    LTEXT           "Y",IDC_STATIC,21,72,8,8
+    LTEXT           "생성할 맵의 타일 수",IDC_STATIC,11,24,54,8
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -406,6 +419,14 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 193
     END
+
+    IDD_TileCreate, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 70
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 120
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -441,6 +462,11 @@ BEGIN
 END
 
 IDD_PATHFIND AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_TileCreate AFX_DIALOG_LAYOUT
 BEGIN
     0
 END

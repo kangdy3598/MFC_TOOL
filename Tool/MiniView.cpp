@@ -30,6 +30,13 @@ END_MESSAGE_MAP()
 void CMiniView::OnDraw(CDC* /*pDC*/)
 {
 	CDocument* pDoc = GetDocument();
+	
+	CMainFrame* pMainFrm = (CMainFrame*)AfxGetMainWnd();
+	CToolView* pToolView = pMainFrm->GetToolView();
+
+	if (!pToolView->m_bRender)
+		return;
+
 	// TODO: 여기에 그리기 코드를 추가합니다.
 	CDevice::Get_Instance()->Render_Begin();
 
