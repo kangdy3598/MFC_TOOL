@@ -42,6 +42,7 @@ END_MESSAGE_MAP()
 CToolView::CToolView() 
 	: m_pTerrain(nullptr)
 	, eMouseState(MouseState::MS_NONE)
+    , m_bRender(false)
 {
     // TODO: 여기에 생성 코드를 추가합니다.
 
@@ -102,19 +103,7 @@ void CToolView::OnInitialUpdate()
         return;
     }
 
-    /*if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(L"../Texture/Cube.png", TEX_SINGLE, L"Cube")))
-    {
-        AfxMessageBox(L"Cube Texture Failed");
-        return;
-    }*/
-
-    m_pTerrain = new CTerrain;
-    if (FAILED(m_pTerrain->Initialize()))
-    {
-        return;
-    }
-
-    m_pTerrain->Set_ToolView(this);
+   // InitTerrain();
 
     m_pUnit = new CUnit;
     if (FAILED(m_pUnit->Initialize()))
@@ -136,6 +125,9 @@ void CToolView::OnDraw(CDC* /*pDC*/)
     CToolDoc* pDoc = GetDocument();
     ASSERT_VALID(pDoc);
     if (!pDoc)
+        return;;
+
+    if (!m_bRender)
         return;
 
     CDevice::Get_Instance()->Render_Begin();
@@ -191,27 +183,8 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 
 
     CTileTool* pTileTool = &pMyForm->m_TileTool;
-
-<<<<<<< HEAD
-    CUnitTool* pUnitTool = &pMyForm->m_UnitTool;
-    m_listUnit.push_back(pUnitTool->Create_Unit(point + GetScrollPosition(), pUnitTool->Get_Index()));
-
-
-    for (auto& iter : m_listUnit)
-    {
-        if (FAILED((*iter).Initialize()))
-            return;
-        (*iter).Set_ToolView(this);
-        (*iter).Set_Keys(pUnitTool->Get_ObjKey(), pUnitTool->Get_StateKey());
-    }
-
-
-    m_pTerrain->Check_Picking(point + GetScrollPosition(), pTileTool);
-
-	//m_pTerrain->Check_Picking(point + GetScrollPosition(), pTileTool);
-=======
 	m_pTerrain->Check_Picking(point + GetScrollPosition(), pTileTool);
->>>>>>> origin/main
+
 	m_pMiniView->OnDraw(nullptr);
 	
 	Invalidate();
@@ -263,6 +236,22 @@ void CToolView::AssertValid() const
 void CToolView::Dump(CDumpContext& dc) const
 {
     CScrollView::Dump(dc);
+}
+
+void CToolView::InitTerrain()
+{
+    m_pTerrain = new CTerrain;
+    if (FAILED(m_pTerrain->Initialize()))
+    {
+        return;
+    }
+
+    m_pTerrain->Set_ToolView(this);
+    m_bRender = true;
+
+    Invalidate();
+    m_pMiniView->m_pTerrain = m_pTerrain;
+    m_pMiniView->OnDraw(nullptr);
 }
 
 CToolDoc* CToolView::GetDocument() const // 디버그되지 않은 버전은 인라인으로 지정됩니다.

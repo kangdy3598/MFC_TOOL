@@ -30,12 +30,13 @@ public:
 	float Get_WideValueX() { return fWideValueX; }
 	float Get_WideValueY() { return fWideValueY; }
 
-
+	void Set_MapTileX(float _fX) { m_fMapTileCountX = _fX; }
+	void Set_MapTileY(float _fY) { m_fMapTileCountY = _fY; }
 private:
 	vector<TILE*>		m_vecTile;
 
-
-
+	float m_fMapTileCountX;
+	float m_fMapTileCountY;
 
 	float fWideValueX;
 	float fWideValueY;

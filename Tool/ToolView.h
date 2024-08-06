@@ -59,6 +59,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 public:
+	void InitTerrain();
 	void Set_MiniView(CMiniView* _pMiniView) { m_pMiniView = _pMiniView; }
 	void Set_MyView(CMyFormView* _pMyView) { m_pMyFormView = _pMyView; }
 
@@ -83,6 +84,7 @@ public:
 
 public:
 	MouseState eMouseState;
+	bool m_bRender;
 public:
 	virtual void OnInitialUpdate();
 	afx_msg void OnDestroy();

@@ -29,7 +29,7 @@ protected:
 public:
 	virtual void OnInitialUpdate();
 
-private:
+public:
 	CTerrain* m_pTerrain;
 	CBuilding* m_pBuilding;
 };
