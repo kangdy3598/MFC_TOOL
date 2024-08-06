@@ -16,6 +16,8 @@ public:
 	void		Set_ToolView(CToolView* pToolView) { m_ToolView = pToolView; }
 	void		Check_Picking(CPoint _mousePosition, CTileTool* _CTileTool);
 
+	vector<BUILDINGDATA*>& Get_VecBuilding() { return m_vecBuilding; }
+
 public:
 	HRESULT		Initialize();
 	void		Update();

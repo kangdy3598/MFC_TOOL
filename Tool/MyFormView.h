@@ -72,6 +72,9 @@ public:
 	HTREEITEM building;
 
 
+	
+	afx_msg void OnBnClickedButton6();
+	afx_msg void OnBnClickedSaveUnit();
 };
 
 

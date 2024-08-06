@@ -13,7 +13,8 @@ public:
     void Release(void) override;
 
 private:
-    HRESULT     Load_Building(const TCHAR* _pBuildingPath);
+
+    BUILDINGDATA* m_pBuildingData;
 
 private:
     vector<BUILDINGDATA*>		m_vecBuilding;

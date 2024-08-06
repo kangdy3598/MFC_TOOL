@@ -40,6 +40,8 @@ BEGIN_MESSAGE_MAP(CMyFormView, CFormView)
     ON_NOTIFY(TVN_ITEMCHANGED, IDC_TREE1, &CMyFormView::OnTvnItemChangedTree)
     ON_BN_CLICKED(IDC_BUTTON7, &CMyFormView::OnBnClickedBuilding)
     ON_BN_CLICKED(IDC_BUTTON4, &CMyFormView::OnBnClickedPathFind)
+    ON_BN_CLICKED(IDC_BUTTON6, &CMyFormView::OnBnClickedButton6)
+    ON_BN_CLICKED(IDC_BUTTON8, &CMyFormView::OnBnClickedSaveUnit)
 END_MESSAGE_MAP()
 
 
@@ -173,15 +175,28 @@ void CMyFormView::OnBnClickedSave()
 
         CTerrain* pTerrain = pMainView->m_pTerrain;
 
+        CBuilding* pBuilding = pMainView->m_pBuilding;
+
         vector<TILE*>& vecTile = pTerrain->Get_VecTile();
+
+        vector<BUILDINGDATA*>& vecBuilding = pBuilding->Get_VecBuilding();
+
 
         if (vecTile.empty())
             return;
 
+        if (vecBuilding.empty())
+           return;
+
         DWORD	dwByte(0);
+
+        DWORD	dwByteBuilding(0);
 
         for (auto& pTile : vecTile)
             WriteFile(hFile, pTile, sizeof(TILE), &dwByte, nullptr);
+
+        for (auto& pBuilding : vecBuilding)
+            WriteFile(hFile, pBuilding, sizeof(BUILDINGDATA), &dwByteBuilding, nullptr);
 
         CloseHandle(hFile);
     }
@@ -264,5 +279,112 @@ void CMyFormView::OnTvnItemChangedTree(NMHDR* pNMHDR, LRESULT* pResult)
     *pResult = 0;
 }
 
+// 건물 저장용(위치 + 사이즈 만 저장)
+void CMyFormView::OnBnClickedButton6()
+{
+    CFileDialog		Dlg(FALSE,	// TRUE(불러오기), FALSE(다른 이름으로 저장)
+        L"dat", // default 확장자명
+        L"BuildingPos.dat", // 대화 상자에 표시될 최초 파일명
+        OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, // OFN_HIDEREADONLY(일기 전용 체크박스 숨김 옵션), OFN_OVERWRITEPROMPT(중복 파일 저장 시, 경고 메시지 띄움 옵션)
+        L"Data Files(*.dat)|*.dat||", // 콤보 박스에 출력될 문자열
+        this);	// 부모 윈도우 주소
+
+    TCHAR		szPath[MAX_PATH] = L"";
+
+    GetCurrentDirectory(MAX_PATH, szPath);
+
+    PathRemoveFileSpec(szPath);
+
+    lstrcat(szPath, L"\\Data");
+
+    // 대화 상자를 열었을 때 보이는 기본 경로
+    Dlg.m_ofn.lpstrInitialDir = szPath;
+
+    // DoModal : 대화 상자의 생성 여부를 판단
+    if (IDOK == Dlg.DoModal())
+    {
+        // GetPathName : 선택된 경로를 반환, GetString : cstring 클래스 문자열을 원시 데이터 타입으로 변환하여 반환
+        CString	str = Dlg.GetPathName().GetString();
+        const TCHAR* pGetPath = str.GetString();
+
+        HANDLE hFile = CreateFile(pGetPath, GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
+
+        if (INVALID_HANDLE_VALUE == hFile)
+            return;
+
+        CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
+        CToolView* pMainView = dynamic_cast<CToolView*>(pMainFrm->m_MainSplitter.GetPane(0, 1));
+
+        CBuilding* pBuilding = pMainView->m_pBuilding;
+
+        vector<BUILDINGDATA*>& vecBuilding = pBuilding->Get_VecBuilding();
+
+        if (vecBuilding.empty())
+            return;
+
+        DWORD	dwByteBuilding(0);
+
+        for (auto& pBuilding : vecBuilding)
+        {
+            WriteFile(hFile, pBuilding->vPos, sizeof(D3DXVECTOR3), &dwByteBuilding, nullptr);
+            WriteFile(hFile, pBuilding->vSize, sizeof(D3DXVECTOR3), &dwByteBuilding, nullptr);
+        }
+
+        CloseHandle(hFile);
+    }
+}
 
 
+void CMyFormView::OnBnClickedSaveUnit()
+{
+    CFileDialog		Dlg(FALSE,	// TRUE(불러오기), FALSE(다른 이름으로 저장)
+        L"dat", // default 확장자명
+        L"UnitPos.dat", // 대화 상자에 표시될 최초 파일명
+        OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, // OFN_HIDEREADONLY(일기 전용 체크박스 숨김 옵션), OFN_OVERWRITEPROMPT(중복 파일 저장 시, 경고 메시지 띄움 옵션)
+        L"Data Files(*.dat)|*.dat||", // 콤보 박스에 출력될 문자열
+        this);	// 부모 윈도우 주소
+
+    TCHAR		szPath[MAX_PATH] = L"";
+
+    GetCurrentDirectory(MAX_PATH, szPath);
+
+    PathRemoveFileSpec(szPath);
+
+    lstrcat(szPath, L"\\Data");
+
+    // 대화 상자를 열었을 때 보이는 기본 경로
+    Dlg.m_ofn.lpstrInitialDir = szPath;
+
+    // DoModal : 대화 상자의 생성 여부를 판단
+    if (IDOK == Dlg.DoModal())
+    {
+        // GetPathName : 선택된 경로를 반환, GetString : cstring 클래스 문자열을 원시 데이터 타입으로 변환하여 반환
+        CString	str = Dlg.GetPathName().GetString();
+        const TCHAR* pGetPath = str.GetString();
+
+        HANDLE hFile = CreateFile(pGetPath, GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
+
+        if (INVALID_HANDLE_VALUE == hFile)
+            return;
+
+        CMainFrame* pMainFrm = dynamic_cast<CMainFrame*>(AfxGetApp()->GetMainWnd());
+        CToolView* pMainView = dynamic_cast<CToolView*>(pMainFrm->m_MainSplitter.GetPane(0, 1));
+
+        CUnit* pUnit = pMainView->m_pUnit;
+
+        vector<UNITDATA*>& vecUnit = pUnit->Get_VecUnit();
+
+        if (vecUnit.empty())
+            return;
+
+        DWORD	dwByteBuilding(0);
+
+        for (auto& pUnit : vecUnit)
+        {
+            WriteFile(hFile, pUnit->vPos, sizeof(D3DXVECTOR3), &dwByteBuilding, nullptr);
+            WriteFile(hFile, pUnit->vSize, sizeof(D3DXVECTOR3), &dwByteBuilding, nullptr);
+        }
+
+        CloseHandle(hFile);
+    }
+}

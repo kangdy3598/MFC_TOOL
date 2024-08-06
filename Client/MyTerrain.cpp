@@ -36,17 +36,17 @@ HRESULT CMyTerrain::Initialize(void)
 
 int CMyTerrain::Update(void)
 {
-	if (0.f > Get_Mouse().x)
-		m_vScroll.x += 5.f;
-
-	if (WINCX < Get_Mouse().x)
-		m_vScroll.x -= 5.f;
-
-	if (0.f > Get_Mouse().y)
-		m_vScroll.y += 5.f;
-
-	if (WINCY < Get_Mouse().y)
-		m_vScroll.y -= 5.f;
+	//if (0.f > Get_Mouse().x)
+	//	m_vScroll.x += 5.f;
+	//
+	//if (WINCX < Get_Mouse().x)
+	//	m_vScroll.x -= 5.f;
+	//
+	//if (0.f > Get_Mouse().y)
+	//	m_vScroll.y += 5.f;
+	//
+	//if (WINCY < Get_Mouse().y)
+	//	m_vScroll.y -= 5.f;
 
 	return 0;
 }

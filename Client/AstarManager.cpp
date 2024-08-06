@@ -125,8 +125,8 @@ int CAstarManager::GetTileIndex(const D3DXVECTOR3& vPos)
 
 	for (size_t index = 0; index < vecTile.size(); ++index)
 	{
-		if (Picking(vPos, index))
-			return index;
+		//if (Picking(vPos, index))
+		//	return index;
 	}
 
 	return -1;

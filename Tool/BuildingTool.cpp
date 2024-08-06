@@ -186,6 +186,7 @@ void CBuildingTool::OnBnClickedSave()
 			WriteFile(hFile, &dwStringSize, sizeof(DWORD), &dwByte, nullptr);
 			WriteFile(hFile, rPair.second->strName.GetString(), dwStringSize, &dwByte, nullptr);
 			
+			//WriteFile(hFile, &rPair.second->vPos, sizeof())
 			WriteFile(hFile, &rPair.second->iHP, sizeof(int), &dwByte, nullptr);
 			WriteFile(hFile, &rPair.second->iAttack, sizeof(int), &dwByte, nullptr);
 			WriteFile(hFile, &rPair.second->iShield, sizeof(int), &dwByte, nullptr);

@@ -8,7 +8,7 @@ class CObjMgr final
 	DECLARE_SINGLETON(CObjMgr)
 
 public:
-	enum ID { TERRAIN, PLAYER, BUILDING, UI, END };
+	enum ID { TERRAIN, UNIT, BUILDING, UI, END };
 
 private:
 	CObjMgr();
@@ -25,6 +25,11 @@ public:
 	void Late_Update(); 
 	void Render(); 
 	void Release(); 
+
+	HRESULT Load_Object(const TCHAR* _pBuildingPath);
+	HRESULT Load_Unit(const TCHAR* _pUnitPath);
+
+
 
 private:
 	list<CObj*>		m_listObject[END];

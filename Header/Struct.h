@@ -96,7 +96,7 @@ typedef	struct tagUnitData
 #ifndef _AFX
 	wstring	strName;
 	wstring strImgPath;
-	wString strKeyName;
+	wstring strKeyName;
 #else
 	CString	strName;
 	CString strImgPath;
@@ -135,7 +135,7 @@ typedef	struct tagBuildingData
 	int		iAttack;
 
 	BYTE	byBuildRace;		// byJobIndex;
-	BYTE	byAttackType;	// byItem;
+	BYTE	byAttackType;		// byItem;
 
 }BUILDINGDATA;
 

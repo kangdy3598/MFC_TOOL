@@ -168,10 +168,10 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	CScrollView::OnLButtonDown(nFlags, point);
 
-	if (eMouseState == MouseState::MS_NONE)
-		return;
+	//if (eMouseState == MouseState::MS_NONE)
+		//return;
 
-	else if (eMouseState == MouseState::MS_BUILDING)
+	/*else*/ if (eMouseState == MouseState::MS_BUILDING)
 	{
 		m_pBuilding->InstallBuilding();
 		m_pMiniView->OnDraw(nullptr);
@@ -192,26 +192,9 @@ void CToolView::OnLButtonDown(UINT nFlags, CPoint point)
 
     CTileTool* pTileTool = &pMyForm->m_TileTool;
 
-<<<<<<< HEAD
-    CUnitTool* pUnitTool = &pMyForm->m_UnitTool;
-    m_listUnit.push_back(pUnitTool->Create_Unit(point + GetScrollPosition(), pUnitTool->Get_Index()));
 
-
-    for (auto& iter : m_listUnit)
-    {
-        if (FAILED((*iter).Initialize()))
-            return;
-        (*iter).Set_ToolView(this);
-        (*iter).Set_Keys(pUnitTool->Get_ObjKey(), pUnitTool->Get_StateKey());
-    }
-
-
-    m_pTerrain->Check_Picking(point + GetScrollPosition(), pTileTool);
-
-	//m_pTerrain->Check_Picking(point + GetScrollPosition(), pTileTool);
-=======
 	m_pTerrain->Check_Picking(point + GetScrollPosition(), pTileTool);
->>>>>>> origin/main
+
 	m_pMiniView->OnDraw(nullptr);
 	
 	Invalidate();

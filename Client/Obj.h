@@ -14,6 +14,7 @@ public:
 	const INFO&		Get_Info(void) const { return m_tInfo; }
 	
 	void			Set_Pos(const D3DXVECTOR3& vPos) { m_tInfo.vPos = vPos; }
+	void			Set_Size(const D3DXVECTOR3& vSize) { m_tInfo.vSize = vSize; }
 	
 	void			Set_Dir(const D3DXVECTOR3& vDir) 
 	{ 

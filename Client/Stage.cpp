@@ -26,8 +26,15 @@ HRESULT CStage::Ready_Scene()
 		return E_FAIL;
 	}	
 
-	if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(L"../Texture/MultiTexture/Unit/Protoss/Zealot/Move0/%d.png",
+	if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(L"../Texture/MultiTexture/Unit/Protoss/Dragoon/Attack3/%d.png",
 		TEX_MULTI, L"Unit", L"Dragoon", 8)))
+	{
+		ERR_MSG(L"Player Img Insert Failed");
+		return E_FAIL;
+	}
+
+	if (FAILED(CTextureMgr::Get_Instance()->Insert_Texture(L"../Texture/MultiTexture/Build/Protoss/Gateway/%d.png",
+		TEX_MULTI, L"Building", L"Gateway", 1)))
 	{
 		ERR_MSG(L"Player Img Insert Failed");
 		return E_FAIL;
@@ -44,22 +51,27 @@ HRESULT CStage::Ready_Scene()
 
 
 	// building
-	CObj* pObj2 = new CMyBuilding;
+	//CObj* pObj2 = new CMyBuilding;
 	
-	if (nullptr == pObj2)
-		return E_FAIL;
+	//if (nullptr == pObj2)
+	//	return E_FAIL;
 
-	pObj2->Initialize();
-	CObjMgr::Get_Instance()->Add_Object(CObjMgr::BUILDING, pObj2);
+	// pObj2->Initialize();
+	// CObjMgr::Get_Instance()->Add_Object(CObjMgr::BUILDING, pObj2);
 
-	// 플레이어
-	CObj* pObj3 = new CMyUnit;
+	CObjMgr::Get_Instance()->Load_Object(L"../Data/BuildingPos.dat");
 
-	if (nullptr == pObj3)
-		return E_FAIL;
 
-	pObj3->Initialize();
-	CObjMgr::Get_Instance()->Add_Object(CObjMgr::PLAYER, pObj3);
+
+	//// 플레이어
+	//CObj* pObj3 = new CMyUnit;
+
+	//if (nullptr == pObj3)
+	//	return E_FAIL;
+
+	//pObj3->Initialize();
+	//CObjMgr::Get_Instance()->Add_Object(CObjMgr::UNIT, pObj3);
+	CObjMgr::Get_Instance()->Load_Unit(L"../Data/UnitPos.dat");
 	
 	return S_OK;
 }

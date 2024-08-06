@@ -20,8 +20,8 @@ HRESULT CMyUnit::Initialize(void)
 	//m_wstrObjKey = L"Unit";
 	//m_wstrStateKey = L"Dragoon";
 
-	m_wstrObjKey = L"Unit";
-	m_wstrStateKey = L"Dragoon";
+	//m_wstrObjKey = L"Unit";
+	//m_wstrStateKey = L"Dragoon";
 
 	m_tFrame = { 0.f, 11.f };
 
@@ -52,7 +52,7 @@ void CMyUnit::Late_Update(void)
 		CAstarManager::Get_Instance()->Start_Astar(m_tInfo.vPos, ::Get_Mouse() - CObj::m_vScroll);
 	}
 
-	CObj::Move_Frame();
+	//CObj::Move_Frame();
 }
 
 void CMyUnit::Render(void)
@@ -63,7 +63,7 @@ void CMyUnit::Render(void)
 	//	m_wstrStateKey.c_str(), (int)m_tFrame.fFrame);
 
 
-	const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Unit", L"Dragoon", 1);
+	const TEXINFO* pTexInfo = CTextureMgr::Get_Instance()->Get_Texture(L"Unit", L"Dragoon", 0);
 
 	float	fCenterX = pTexInfo->tImgInfo.Width / 2.f;
 	float	fCenterY = pTexInfo->tImgInfo.Height / 2.f;
